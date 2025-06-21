@@ -5,7 +5,7 @@ from .models import *
 from main.models import *
 from django.contrib.auth.models import User, auth
 from . import views
-# import pandas as pd
+import pandas as pd
 from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponse
 from django.template.loader import render_to_string
@@ -137,6 +137,10 @@ def index(request):
     else:
         showSubjects = f" { allSubjects } Subjects"
 
+    # Get all results for all students
+    student_results = {}
+    for student in students:
+        student_results[student.user.username] = Result.objects.filter(sid=student.user.username)
 
     context = {
         'pagename':pagename,
@@ -146,6 +150,7 @@ def index(request):
         'showSubjects':showSubjects,
         'students':students[:20],
         'results':results[:20],
+        'student_results': student_results,
     }
     return render(request, 'lms/index.html', context)
 
