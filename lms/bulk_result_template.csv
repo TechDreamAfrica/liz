@@ -1,0 +1,3 @@
+sid,stage,name,position,promoted_to,term,number_on_roll,boys,girls,attendance,teachers_comment,next_term,subject,class_score,exam_score
+# Example:,,,,,,,,,,,,,,
+1001,Primary 1,John Doe,1st,Primary 2,First,30,15,15,95%,Excellent,9/10/2025,Mathematics,18,80

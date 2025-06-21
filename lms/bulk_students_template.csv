@@ -1,0 +1,3 @@
+sid,lastname,firstname,gender,dob,religion,phone,blood_group,stage,address,disability
+# Example:
+1001,Doe,John,Male,2012-05-10,Christian,08012345678,O+,Primary 1,123 Main St,None
