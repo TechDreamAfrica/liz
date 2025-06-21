@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block content %}
+
+{% include "breadcrumb.html" %}
+
+
+<section class="news-section section-padding fix">
+    <div class="container">
+        {% include "blogs-component.html" %}
+    </div>
+</section>
+
+{% endblock content %}

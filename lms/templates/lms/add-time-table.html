@@ -1,0 +1,94 @@
+{% extends "lms/layout.html" %}
+{% load static %}
+
+{% block content %}
+
+    <div class="content container-fluid">
+        {% include "lms/page-header.html" %}
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card comman-shadow">
+                    <div class="card-body">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-12">
+                                    <h5 class="form-title student-info">{{ pagename }}</h5>
+                                    {% if messages %}
+                                    {% for msg in messages %}
+                                        <div class="alert alert-{{ msg.tags }}">{{msg}}</div>
+                                    {% endfor %}   
+                                    {% endif %}
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Day <span class="login-danger" required>*</span></label>
+                                        <select class="form-control select" name="day">
+                                            <option>Select Day</option>
+                                            <option>Monday</option>
+                                            <option>Tuesday</option>
+                                            <option>Wednesday</option>
+                                            <option>Thursday</option>
+                                            <option>Friday</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Subject <span class="login-danger" required>*</span></label>
+                                        <select class="form-control select" name="subject">
+                                            <option>Select Subject</option>
+                                            {% for subject in subjects %}
+                                            <option>{{ subject.title }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Teacher <span class="login-danger" required>*</span></label>
+                                        <select class="form-control select" name="teacher">
+                                            <option>Select Teacher</option>
+                                            {% for teacher in teachers %}
+                                            <option>{{ teacher.lastname }} {{ teacher.firstname }} {{ teacher.othername }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Class <span class="login-danger" required>*</span></label>
+                                        <select class="form-control select" name="stage">
+                                            <option>Select Class</option>
+                                            {% for stage in stages %}
+                                            <option>{{ stage.title }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Start Time <span class="login-danger" required>*</span></label>
+                                        <input type="time" class="form-control" name="start">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>End Time <span class="login-danger" required>*</span></label>
+                                        <input type="time" class="form-control" name="end">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="student-submit">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

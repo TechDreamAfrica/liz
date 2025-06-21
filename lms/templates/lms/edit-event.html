@@ -1,0 +1,73 @@
+{% extends "lms/layout.html" %}
+{% load static %}
+
+{% block content %}
+
+    <div class="content container-fluid">
+        {% include "lms/page-header.html" %}
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card comman-shadow">
+                    <div class="card-body">
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-12">
+                                    <h5 class="form-title student-info">{{ pagename }} <span><a href="javascript:;"><i class="feather-more-vertical"></i></a></span></h5>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group local-forms">
+                                        <label>Event Title</label>
+                                        <input class="form-control" type="text" placeholder="Enter Event Title" required name="name" value="{{ event.title }}">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group local-forms">
+                                        <label>Venue<span class="login-danger" required>*</span></label>
+                                        <input class="form-control" type="text" placeholder="Enter Event Venue" name="venue" value="{{ event.venue }}">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-3">
+                                    <div class="form-group local-forms">
+                                        <label>Date <i class="fas fa-calendar"></i></label>
+                                        <input class="form-control" type="text" placeholder="DD-MM-YYYY" name="date" value="{{ event.date }}">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-3">
+                                    <div class="form-group local-forms">
+                                        <label>Time <i class="fas fa-clock"></i></label>
+                                        <input class="form-control" type="text" placeholder="00-00" name="time" value="{{ event.time }}">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-3">
+                                    <div class="form-group local-forms">
+                                        <label>Phone </label>
+                                        <input class="form-control" type="number" placeholder="Enter Phone Number" name="phone" value="{{ event.phone }}">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-3">
+                                    <div class="form-group local-forms">
+                                        <label>Imaage </label>
+                                        <input class="form-control" type="file" name="image">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12">
+                                    <div class="form-group local-forms">
+                                        <label>About </label>
+                                        <textarea class="form-control" row="30" name="about" value="{{ event.title }}"> {{ event.about }} </textarea>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="student-submit">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

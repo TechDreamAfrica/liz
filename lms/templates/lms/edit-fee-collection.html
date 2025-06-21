@@ -1,0 +1,60 @@
+{% extends "lms/layout.html" %}
+{% load static %}
+
+{% block content %}
+
+    <div class="content container-fluid">
+        {% include "lms/page-header.html" %}
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card comman-shadow">
+                    <div class="card-body">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-12">
+                                    <h5 class="form-title student-info">{{ pagename }} <span><a href="javascript:;"><i class="feather-more-vertical"></i></a></span></h5>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group local-forms">
+                                        <label>Student ID </label>
+                                        <input class="form-control" type="number" placeholder="Enter Student ID" required name="sid" value={{ fee_collection.sid }}>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group local-forms">
+                                        <label>Fee/Purpose<span class="login-danger" required>*</span></label>
+                                        <select class="form-control select" name="fee">
+                                            <option>{{ fee_collection.fee }}</option>
+                                            {% for fee in fees %}
+                                            <option>{{ fee.fee }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group local-forms">
+                                        <label>Amount<span class="login-danger" required>*</span></label>
+                                        <input class="form-control" type="number" placeholder="Enter Amount" name="amount" value={{ fee_collection.amount }}>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group local-forms">
+                                        <label>Paid<span class="login-danger" required>*</span></label>
+                                        <input class="form-control" type="number" placeholder="Enter Amount" name="paid" value={{ fee_collection.paid }}>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="student-submit">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

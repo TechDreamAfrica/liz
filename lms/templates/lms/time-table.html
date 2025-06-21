@@ -1,0 +1,81 @@
+{% extends "lms/layout.html" %}
+{% load static %}
+
+{% block content %}
+
+    <div class="content container-fluid">
+    
+    {% include "lms/page-header.html" %}
+    
+ 
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card card-table comman-shadow">
+                <div class="card-body">
+                    <div class="page-header">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <h3 class="page-title">{{ pagename }}</h3>
+                            </div>
+                            <div class="col-auto text-end float-end ms-auto download-grp">
+                                <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-outline-gray me-2 active"><i class="fas fa-chevron-left"></i></a>
+                                <a href="{% url "add-time-table" %}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="table-responsive">
+                        <table class="table border-0 star-time_table table-hover table-center mb-0 datatable table-striped">
+                            <thead class="time_table-thread">
+                                <tr>
+                                    <th>NO.</th>
+                                    <th>Subject</th>
+                                    <th>Class</th>
+                                    <th>Days</th>
+                                    <th>Teacher</th>
+                                    <th>Start Time</th>
+                                    <th>End Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                               {% for time_table in time_tables %}
+                               <tr>
+                                    <td>
+                                        {{forloop.counter }}
+                                    </td>
+                                    <td>
+                                        <h2 class="table-avatar">
+                                            <a href="">
+                                                {{ time_table.subject.title }}
+                                            </a>
+                                        </h2>
+                                    </td>
+                                    <td>{{ time_table.stage }}</td>
+                                    <td>{{ time_table.day }}</td>
+                                    <td>{{ time_table.teacher }}</td>
+                                    <td>{{ time_table.start }}</td>
+                                    <td>{{ time_table.end }}</td>
+                                    <td class="text-end">
+                                        <div class="actions ">
+                                            {% comment %} <a href="{% url 'read-time_table' time_table.sid %}" class="btn btn-success">
+                                                <i class="feather-eye"></i>
+                                            </a>
+                                            <a href="{% url 'edit-time_table' time_table.sid %}" class="btn btn-warning">
+                                                <i class="feather-edit"></i>
+                                            </a>
+                                            <a href="{% url 'delete-time_table' time_table.sid %}" class="btn btn-danger">
+                                                <i class="feather-edit"></i>
+                                            </a> {% endcomment %}
+                                        </div>
+                                    </td>
+                                </tr>
+                               {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

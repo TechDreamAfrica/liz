@@ -1,0 +1,108 @@
+{% extends "lms/layout.html" %}
+{% load static %}
+
+{% block content %}
+
+    <div class="content container-fluid">
+    
+    {% include "lms/page-header.html" %}
+    
+    <div class="department-group-form">
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search by ID ...">
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search by Name ...">
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search by Phone ...">
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="search-department-btn">
+                    <button type="btn" class="btn btn-primary">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card card-table comman-shadow">
+                <div class="card-body">
+                    <div class="page-header">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <h3 class="page-title">Departments</h3>
+                            </div>
+                            <div class="col-auto text-end float-end ms-auto download-grp">
+                                <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-outline-gray me-2 active">
+                                    <i class="fas fa-chevron-left"></i>
+                                </a>
+                                <a href="" class="btn btn-outline-primary me-2"> {{ showDepartments }}</a>
+                                <a href="{% url 'add-department' %}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="table-responsive">
+                        <table class="table border-0 star-department table-hover table-center mb-0 datatable table-striped">
+                            <thead class="department-thread">
+                                <tr>
+                                    <th>
+                                       NO.
+                                    </th>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>HOD</th>
+                                    <th>Ass. HOD</th>
+                                    <th>Staff</th>
+                                    <th class="text-end">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                               {% for department in departments %}
+                               <tr>
+                                <td>
+                                    {{ forloop.counter }}
+                                </td>
+                                <td>{{ department.did }}</td>
+                                <td>
+                                    <h2 class="table-avatar">
+                                        <a href="{% url 'read-department' department.did %}">
+                                            {{ department.title }}
+                                        </a>
+                                    </h2>
+                                </td>
+                                <td>{{ department.hod }}</td>
+                                <td>{{ department.assistant_hod }}</td>
+                                <td>{{ department.number_of_workers }}</td>
+                                <td class="text-end">
+                                    <div class="actions ">
+                                        <a href="{% url 'read-department' department.did %}" class="btn btn-success">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a href="{% url 'edit-department' department.did %}" class="btn btn-warning">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="{% url 'delete-department' department.did %}" class="btn btn-danger">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                               {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

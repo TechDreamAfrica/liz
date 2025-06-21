@@ -1,0 +1,101 @@
+{% extends "lms/layout.html" %}
+{% load static %}
+
+{% block content %}
+
+    <div class="content container-fluid">
+        {% include "lms/page-header.html" %}
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card comman-shadow">
+                    <div class="card-body">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-12">
+                                    <h5 class="form-title student-info">{{ pagename }} <span><a href="javascript:;"><i class="feather-more-vertical"></i></a></span></h5>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Teacher ID </label>
+                                        <input class="form-control" type="number" value="{{ teacher.tid }}" required name="id">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>First Name <span class="login-danger" required>*</span></label>
+                                        <input class="form-control" type="text" value="{{ teacher.firstname }}" name="firstname">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>lastname <span class="login-danger" required>*</span></label>
+                                        <input class="form-control" type="text" value="{{ teacher.lastname }}" name="lastname">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Othernames <span class="login-danger">optional</span></label>
+                                        <input class="form-control" type="text" value="{{ teacher.othername }}" name="othername">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Address <span class="login-danger" required>*</span></label>
+                                        <input class="form-control" type="text" value="{{ teacher.address }}" name="address">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Gender <span class="login-danger" required>*</span></label>
+                                        <select class="form-control select" name="gender">
+                                            <option>{{ teacher.gender }}</option>
+                                            <option>Female</option>
+                                            <option>Male</option>
+                                            <option>Others</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Disability <span class="login-danger" required>*</span></label>
+                                        <select class="form-control select" name="disability">
+                                            <option>{{ teacher.disability }}</option>
+                                            <option>None</option>
+                                            <option>Movement</option>
+                                            <option>Hearing</option>
+                                        </select>
+                                    </div>
+                                </div>
+                               
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Phone </label>
+                                        <input class="form-control" type="number" value="{{ teacher.phone }}" name="phone">
+                                    </div>
+                                </div>
+                                 <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Assign Role <span class="login-danger" >Optional</span></label>
+                                        <select class="form-control select" name="role">
+                                            <option selected >{{ teacher.role }}</option>
+                                            <option>Staff</option>
+                                            <option>Admin</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="student-submit">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

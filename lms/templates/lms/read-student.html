@@ -1,0 +1,257 @@
+{% extends "lms/layout.html" %}
+{% load static %}
+
+{% block content %}
+
+    <div class="content container-fluid">
+       {% include "lms/page-header.html" %}
+
+        <div class="card">
+            <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="about-info">
+                        <h4>Profile</h4>
+                    </div>
+                    <div class="student-profile-head">
+                        <div class="profile-bg-img">
+                            <img src="{% static 'lms/assets/img/profile-bg.jpg' %}" alt="Profile">
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4">
+                                <div class="profile-user-box">
+                                    <div class="profile-user-img">
+                                        <img src="{% static 'lms/assets/img/profile-user.png' %}" alt="Profile">
+                                    </div>
+                                    <div class="names-profiles">
+                                        <h4>{{ student.lastname }} {{ student.firstname }}</h4>
+                                        <h5>Student ID: {{ student.user.username }}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 d-flex align-items-center">
+                                <div class="follow-group">
+                                    <div class="students-follows">
+                                        <h5>Fee</h5>
+                                        <h4>{{ fee.fee }}</h4>
+                                    </div>
+                                    <div class="students-follows">
+                                        <h5>Paid</h5>
+                                        <h4>{{ fee.paid }}</h4>
+                                    </div>
+                                    <div class="students-follows">
+                                        <h5>Arrears</h5>
+                                        <h4>{{ fee.arrears }}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 d-flex align-items-center">
+                                <div class="follow-btn-group">
+                                    <a href="tel:{{ student.phone }}" class="btn btn-info follow-btns" target="_blank">Call</a>
+                                    <a href="https://wa.me/{{ student.phone }}" class="btn btn-info message-btns" target="_blank">WhatsApp</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="student-personals-grp">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="heading-detail">
+                                    <h4>Student Details :</h4>
+                                </div>
+                                <div class="personal-activity">
+                                    <div class="personal-icons">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="views-personal">
+                                        <h4>Name</h4>
+                                        <h5>{{ student.lastname }} {{ student.firstname }}</h5>
+                                    </div>
+                                </div>
+                                <div class="personal-activity">
+                                    <div class="personal-icons">
+                                        <img src="{% static 'lms/assets/img/icons/buliding-icon.svg' %}" alt="">
+                                    </div>
+                                    <div class="views-personal">
+                                        <h4>Class </h4>
+                                        <h5>{{ student.stage}}</h5>
+                                    </div>
+                                </div>
+                                <div class="personal-activity">
+                                    <div class="personal-icons">
+                                        <i class="fas fa-phone"></i>
+                                    </div>
+                                    <div class="views-personal">
+                                        <h4>Mobile</h4>
+                                        <h5>{{ student.phone }}</h5>
+                                    </div>
+                                </div>
+                                <div class="personal-activity">
+                                    <div class="personal-icons">
+                                        {% if student.disability == "Movement" %}
+                                        <i class="fas fa-wheelchair"></i>
+                                        {% elif student.disability == "Vision" %}
+                                        <i class="fas fa-blind"></i>
+                                        {% elif student.disability == "Hearing" %}
+                                        <i class="fas fa-deaf"></i>
+                                        {% else %}
+                                        <i class="fas fa-ban"></i>
+                                        {% endif %}
+                                    </div>
+                                    <div class="views-personal">
+                                        <h4>Special (Disability)</h4>
+                                        <h5>
+                                            {{ student.disability }}
+                                        </h5>
+                                    </div>
+                                </div>
+                                <div class="personal-activity">
+                                    <div class="personal-icons">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="views-personal">
+                                        <h4>Gender</h4>
+                                        <h5>{{ student.gender}}</h5>
+                                    </div>
+                                </div>
+                                <div class="personal-activity">
+                                    <div class="personal-icons">
+                                        <i class="fas fa-calendar"></i>
+                                    </div>
+                                    <div class="views-personal">
+                                        <h4>Date of Birth</h4>
+                                        <h5>{{ student.dob }}</h5>
+                                    </div>
+                                </div>
+                                <div class="personal-activity">
+                                    <div class="personal-icons">
+                                        <i class="fas fa-map"></i>
+                                    </div>
+                                    <div class="views-personal">
+                                        <h4>Address</h4>
+                                        <h5>{{ student.address}}</h5>
+                                    </div>
+                                </div>
+                                <div class="personal-activity">
+                                    <div class="personal-icons">
+                                        <i class="fas fa-plus"></i>
+                                    </div>
+                                    <div class="views-personal">
+                                        <h4>Blood Group</h4>
+                                        <h5>{{ student.blood_group}}</h5>
+                                    </div>
+                                </div>
+                                <div class="personal-activity">
+                                    <div class="personal-icons">
+                                        <i class="fas fa-cross"></i>
+                                    </div>
+                                    <div class="views-personal">
+                                        <h4>Religion</h4>
+                                        <h5>{{ student.religion}}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="student-submit">
+                            <a href="{% url "edit-student" student.user.username %}"  class="btn btn-primary">Edit</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <h4>Academic Records</h4>
+                    <div class="table-responsive">
+                        <table class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">
+                            <thead class="student-thread">
+                                <tr>
+                                    <th>
+                                        NO.
+                                    </th>
+                                    <th>Class</th>
+                                    <th>Term</th>
+                                    <th>File</th>
+                                    <th class="text-end">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                               {% for result in results %}
+                                <tr>
+                                    <td>
+                                    {{ forloop.counter }}
+                                    </td>
+                                    <td>Class {{ result.stage }}</td>
+                                    <td>Term {{ result.term }}</td>
+                                    <td>
+                                        <h2 class="table-avatar">
+                                            <a href="{{ result.report.url }}" target="_blank">{{ result.sid }}</a>
+                                        </h2>
+                                    </td>
+                                    <td class="text-end">
+                                        <div class="actions ">
+                                            <a href="{{ result.report.url }}" class="btn btn-success" target="_blank">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a href="{% url "edit-student" student.user %}" class="btn btn-warning">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a href="{% url "delete-result" result.id %}" class="btn btn-danger">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                               {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <br>
+                    <div class="table-responsive">
+                        <h4>Fees Collection</h4>
+                        <table class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">
+                            <thead class="student-thread">
+                                <tr>
+                                    <th>
+                                        NO.
+                                    </th>
+                                    <th>Fee</th>
+                                    <th>Amount</th>
+                                    <th>Paid</th>
+                                    <th>Arrears</th>
+                                    <th class="text-end">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                               {% for fee in fee_collection %}
+                                <tr>
+                                    <td>
+                                    {{ forloop.counter }}
+                                    </td>
+                                    <td> {{ fee.fee }} Fees</td>
+                                    <td> Ghc {{ fee.amount }}</td>
+                                    <td> Ghc {{ fee.paid }}</td>
+                                    <td> Ghc {{ fee.arrears }}</td>
+                                    <td class="text-end">
+                                        <div class="actions ">
+                                            <a href="{% url "edit-fee-collection" fee.sid %}" class="btn btn-warning">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a href="" class="btn btn-danger">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                               {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

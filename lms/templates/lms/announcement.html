@@ -1,0 +1,59 @@
+{% extends "lms/layout.html" %}
+{% load static %}
+
+{% block content %}
+
+    <div class="content container-fluid">
+    
+        <div class="page-header">
+            <div class="row">
+                <div class="col">
+                    <h3 class="page-title">{{ pagename }}</h3>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ request.META.HTTP_REFERER }}">{{ user.username }}</a></li>
+                        <li class="breadcrumb-item active">{{ pagename }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    
+        <div class="row">
+            <div class="col-lg-3 col-md-4">
+                <div class="compose-btn">
+                    <a href="{% url "add-announcement" %}" class="btn btn-primary btn-block">Add Announcement</a>
+                </div>
+            </div>
+            <div class="col-lg-9 col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        
+                        <div class="email-content">
+                            <div class="table-responsive">
+                                <table class="table table-inbox table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="6">
+                                                All Announcements
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                       {% for announcement in announcements %}
+                                       <tr class="unread clickable-row">
+                                        <td class="name">{{ announcement.heading }}</td>
+                                        <td class="subject">{{ announcement.body | slice:":100"}}</td>
+                                        <td class="mail-date">{{ announcement.date_posted }}</td>
+                                    </tr>
+                                       {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

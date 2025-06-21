@@ -1,0 +1,75 @@
+{% extends "lms/layout.html" %}
+{% load static %}
+
+{% block content %}
+
+    <div class="content container-fluid">
+        {% include "lms/page-header.html" %}
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card comman-shadow">
+                    <div class="card-body">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-12">
+                                    <h5 class="form-title student-info">{{ pagename }} <span><a href="javascript:;"><i class="feather-more-vertical"></i></a></span></h5>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Department ID </label>
+                                        <input class="form-control" type="number" placeholder="Enter Department ID" required name="id">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Name of Department <span class="login-danger" required>*</span></label>
+                                        <input class="form-control" type="text" placeholder="Enter Name" name="name">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Head of Department <span class="login-danger" required>*</span></label>
+                                        <input class="form-control" type="text" placeholder="Enter Names of HOD" name="hod">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Assistant HOD <span class="login-danger">optional</span></label>
+                                        <input class="form-control" type="text" placeholder="Enter Names of Asst. HOD" name="ahod">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>About <span class="login-danger" required>*</span></label>
+                                        <input class="form-control" type="text" placeholder="Write about the Department" name="about">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Number of Staff <span class="login-danger" required>*</span></label>
+                                        <select class="form-control select" name="number">
+                                            <option>Select Number</option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>5+</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="student-submit">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

@@ -1,0 +1,48 @@
+{% extends "lms/layout.html" %}
+{% load static %}
+
+{% block content %}
+
+    <div class="content container-fluid">
+        {% include "lms/page-header.html" %}
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card comman-shadow">
+                    <div class="card-body">
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-12">
+                                    <h5 class="form-title student-info">{{ pagename }}<span><a href="javascript:;"><i class="feather-more-vertical"></i></a></span></h5>
+                                    {% if messages %}
+                                    {% for msg in messages %}
+                                        <div class="alert alert-{{ msg.tags }}">{{msg}}</div>
+                                    {% endfor %}   
+                                    {% endif %}
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Report </label>
+                                        <input class="form-control" type="file" name="report" accept=".xlsx" required>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4" hidden>
+                                    <div class="form-group local-forms">
+                                        <label>Staff </label>
+                                        <input class="form-control" type="text" name="staff" value="{{ user.username }}">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="student-submit">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

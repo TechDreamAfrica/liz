@@ -1,0 +1,49 @@
+{% load static %}
+
+<section class="team-section fix section-bg section-padding">
+    <div class="top-shape">
+        <img src="{% static 'assets/img/section-top-shape.png' %}" alt="shape-img">
+    </div>
+    <div class="love-shape float-bob-x">
+        <img src="{% static 'assets/img/team/love.png' %}" alt="shape-img">
+    </div>
+    <div class="frame-shape">
+        <img src="{% static 'assets/img/team/frame.png' %}" alt="shape-img">
+    </div>
+    <div class="container">
+        <div class="section-title-area">
+            <div class="section-title mt-60">
+                <span class="wow fadeInUp">Our Experts</span>
+                <h2 class="wow fadeInUp" data-wow-delay=".3s">Our Expert Instructors and Staff</h2>
+            </div>
+            <div class="array-button wow fadeInUp" data-wow-delay=".5s">
+                <button class="array-prev"><i class="fal fa-arrow-left"></i></button>
+                <button class="array-next"><i class="fal fa-arrow-right"></i></button>
+            </div>
+        </div>
+        <div class="swiper team-slider">
+            <div class="swiper-wrapper">
+                
+                {% for teacher in staff %}
+                <div class="swiper-slide">
+                    <div class="team-items">
+                        <div class="team-image">
+                            <div class="shape-img">
+                                <img src="{% static 'assets/img/team/team-shape.png' %}" alt="img">
+                            </div>
+                            <img src="{{ teacher.image.url }}" alt="team-img">
+                        </div>
+                        <div class="team-content">
+                            <h3>
+                                <a href="">{{ teacher.name }}</a>
+                            </h3>
+                            <p>{{ teacher.position }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                    
+            </div>
+        </div>
+    </div>
+</section>

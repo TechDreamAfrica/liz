@@ -1,0 +1,94 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block content %}
+
+<!--<< Breadcrumb Section Start >>-->
+{% include "breadcrumb.html" %}
+
+<!-- About Activities Section Start -->
+<section class="about-activities-section-2 style-2 section-padding">
+    <div class="zebra-shape float-bob-y">
+        <img src="{% static 'assets/img/about/zebra.png' %}" alt="shape-img">
+    </div>
+    <div class="bottom-shape">
+        <img src="{% static 'assets/img/section-top-shape-2.png' %}" alt="shape-img">
+    </div>
+    <div class="sun-shape">
+        <img src="{% static 'assets/img/client/shape-2.png' %}" alt="shape-img">
+    </div>
+    <div class="container">
+        <div class="about-activities-wrapper style-2 mb-55">
+            <div class="row g-4">
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay=".3s">
+                    <div class="activities-image-items">
+                        <img src="{{ about_us.image.url }}" alt="img">
+                        <div class="radius-shape">
+                            <img src="{% static 'assets/img/about/radius-shape.png' %}" alt="shape-img">
+                        </div>
+                        <div class="circle-shape">
+                            <img src="{% static 'assets/img/about/circle.png' %}" alt="shape-img">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="activities-content">
+                        <div class="section-title">
+                            <span class="wow fadeInUp">About Us</span>
+                            <h2 class="wow fadeInUp" data-wow-delay=".3s">
+                               {{ about_us.title | safe }}
+                            </h2>
+                        </div>
+                        <p class="mt-3 mt-md-0 wow fadeInUp" data-wow-delay=".5s">
+                            {{ about_us.about | safe }}
+                        </p>
+                        <div class="row g-4 mt-4">
+                            <div class="col-xl-12 col-lg-8 col-md-6 wow fadeInUp" data-wow-delay=".3s">
+                                <div class="icon-items">
+                                    <div class="icon">
+                                        <i class="icon-icon-12"></i>
+                                    </div>
+                                    <div class="content">
+                                        <h5>Mission</h5>
+                                        <p>{{ about_us.mission | safe }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row g-4 mt-4">
+                            <div class="col-xl-12 col-lg-8 col-md-6 wow fadeInUp" data-wow-delay=".3s">
+                                <div class="icon-items">
+                                    <div class="icon">
+                                        <i class="icon-icon-12"></i>
+                                    </div>
+                                    <div class="content">
+                                        <h5>Vision</h5>
+                                        <p>{{ about_us.vision | safe }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="about-author">
+                            <div class="author-icon wow fadeInUp" data-wow-delay=".5s">
+                                <div class="icon">
+                                        <i class="fa-solid fa-phone"></i>
+                                </div>
+                                <div class="content">
+                                    <span>Call Us Now</span>
+                                    <h5>
+                                        <a href="tel:+233{{ contact_details.primary_contact }}">+233{{ contact_details.primary_contact }}</a>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include "staff.html" %}
+
+
+{% endblock content %}

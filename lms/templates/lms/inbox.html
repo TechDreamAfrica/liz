@@ -1,0 +1,50 @@
+{% extends "lms/layout.html" %}
+{% load static %}
+
+{% block content %}
+
+    <div class="content container-fluid">
+    
+        {% include "lms/page-header.html" %}
+    
+        <div class="row">
+            <div class="col-lg-3 col-md-4">
+                <div class="compose-btn">
+                    <a href="{% url "compose" %}" class="btn btn-primary btn-block">Inbox ({{ allInbox }})</a>
+                </div>
+              
+            </div>
+            <div class="col-lg-9 col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="email-content">
+                            <div class="table-responsive">
+                                <table class="table table-inbox table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="6">
+                                                Messages
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                       {% for inbox in inbox %}
+                                       <tr class="unread clickable-row">
+                                        <td class="name">{{ inbox.name }}</td>
+                                        <td class="name">{{ inbox.phone }}</td>
+                                        <td class="subject">{{ inbox.message }}</td>
+                                        <td class="mail-date">{{ inbox.date_posted }}</td>
+                                    </tr>
+                                       {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

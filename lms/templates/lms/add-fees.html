@@ -1,0 +1,76 @@
+{% extends "lms/layout.html" %}
+{% load static %}
+
+{% block content %}
+
+    <div class="content container-fluid">
+        {% include "lms/page-header.html" %}
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card comman-shadow">
+                    <div class="card-body">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-12">
+                                    <h5 class="form-title student-info">{{ pagename }}</h5>
+                                    {% if messages %}
+                                    {% for msg in messages %}
+                                        <div class="alert alert-{{ msg.tags }}">{{msg}}</div>
+                                    {% endfor %}   
+                                    {% endif %}
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Student ID </label>
+                                        <input class="form-control" type="number" placeholder="Enter Student ID" required name="fid">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Fee/Purpose<span class="login-danger" required>*</span></label>
+                                        <input class="form-control" type="text" placeholder="Enter Fee Purpose" name="fee">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Amount<span class="login-danger" required>*</span></label>
+                                        <input class="form-control" type="number" placeholder="Enter Amount" name="amount">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Class <span class="login-danger" required>*</span></label>
+                                        <select class="form-control select" name="class">
+                                            <option>Please Select Class </option>
+                                            {% for stage in stages %}
+                                            <option>{{ stage.title }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Term <span class="login-danger" required>*</span></label>
+                                        <select class="form-control select" name="term">
+                                            <option>Please Select Class </option>
+                                            {% for term in terms %}
+                                            <option>{{ term.title }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="student-submit">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

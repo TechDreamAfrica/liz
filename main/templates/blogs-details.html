@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block content %}
+<!-- << Breadcrumb Section Start >> -->
+{% include "breadcrumb.html" %}
+
+<section class="news-details fix section-padding">
+    <div class="container">
+        <div class="news-details-area">
+            <div class="row g-5">
+                <div class="col-12 col-lg-8">
+                    <div class="blog-post-details">
+                        <div class="single-blog-post">
+                            <div class="post-featured-thumb bg-cover" style="background-image: url('{{ blog.image.url }}');"></div>
+                            <div class="post-content">
+                                <ul class="post-list d-flex align-items-center">
+                                    <li>
+                                        <i class="fa-regular fa-user"></i>
+                                        By Admin
+                                    </li>
+                                    <li>
+                                        <i class="fa-solid fa-calendar-days"></i>
+                                        {{ blog.date_posted|date:"M d, Y" }}
+                                    </li>
+                                    <li>
+                                        <i class="fa-solid fa-tag"></i>
+                                        Education
+                                    </li>
+                                </ul>
+                                <h3>{{ blog.headline }}</h3>
+                                <p class="mb-3">
+                                   {{ blog.article|safe }}
+                                </p>  
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

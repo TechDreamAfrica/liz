@@ -1,0 +1,89 @@
+{% extends "lms/layout.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="content container-fluid">
+        {% include "lms/page-header.html" %}
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card card-table">
+                    <div class="card-body">
+                        <div class="page-header">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <h3 class="page-title">{{ pagename }}</h3>
+                                </div>
+                                <div class="col-auto text-end float-end ms-auto download-grp">
+                                    <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-outline-gray me-2 active">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </a>
+    
+                                    <a href="{% url 'add-fees-collection' %}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table border-0 star-result table-hover table-center mb-0 datatable table-striped">
+                                <thead class="student-thread">
+                                    <tr>
+                                        <th>NO.</th>
+                                        <th>Fee</th>
+                                        <th>Student</th>
+                                        <th>Amount</th>
+                                        <th>Paid</th>
+                                        <th>Arrears</th>
+                                        <th>Credit</th>
+                                        <th>Paid Date</th>
+                                        <th class="text-end">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for fee in fees %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                            <td>
+                                                <a>{{ fee.fee }}</a>
+                                            </h2>
+                                        </td>
+                                        <td>{{ fee.sid }}</td>
+                                        <td>{{ fee.amount }}</td>
+                                        <td>{{ fee.paid}}</td>
+                                        <td>{{ fee.arrears}}</td>
+                                        <td>{{ fee.credit}}</td>
+                                        <td>{{ fee.bill_date}}</td>
+                                        
+                                        {% if fee.arrears == 0 %}
+                                        <td class="text-end">
+                                            <span class="badge badge-success">Paid</span>
+                                            <a href="{% url "edit-fee-collection" fee.sid %}" class="btn btn-warning">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a href="{% url "delete-fee-collection" fee.sid %}" class="btn btn-danger">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </td>
+                                        
+                                        {% else %}
+                                        <td class="text-end">
+                                            <span class="badge badge-danger">Owing</span>
+                                            <a href="{% url "edit-fee-collection" fee.id %}" class="btn btn-warning">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a href="{% url "delete-fee-collection" fee.id %}" class="btn btn-danger">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </td>
+                                        {% endif %}
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

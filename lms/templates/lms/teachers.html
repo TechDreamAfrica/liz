@@ -1,0 +1,123 @@
+{% extends "lms/layout.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="content container-fluid">
+    
+    {% include "lms/page-header.html" %}
+    
+    <div class="student-group-form">
+        <div class="row">
+            <form method="GET" action="{% url 'search-student-by-name' %}">
+            <div class="col-lg-10 col-md-6">
+                <div class="form-group">
+                    {% csrf_token %}
+                    <input type="text" class="form-control" name="name" placeholder="Search by ID ...">
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="search-student-btn">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </div>
+        </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card card-table comman-shadow">
+                <div class="card-body">
+                    <div class="page-header">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <h3 class="page-title">Teachers</h3>
+                            </div>
+                            <div class="col-auto text-end float-end ms-auto download-grp">
+                                <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-outline-gray me-2 active">
+                                    <i class="fas fa-chevron-left"></i>
+                                </a>
+                                <a href="" class="btn btn-outline-primary me-2"> {{ showTeachers }}</a>
+                                <a href="{% url 'add-teacher' %}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="table-responsive">
+                        <table class="table border-0 star-teacher table-hover table-center mb-0 datatable table-striped">
+                            <thead class="teacher-thread">
+                                <tr>
+                                    <th>
+                                        NO.
+                                    </th>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Role</th>
+                                    <th>Gender</th>
+                                    <th>Mobile Number</th>
+                                    <th class="text-end">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                               {% for teacher in teachers %}
+                                    <tr>
+                                        <td>
+                                            {{ forloop.counter }}
+                                        </td>
+                                        <td>{{ teacher.tid }}</td>
+                                        <td>
+                                            <h2 class="table-avatar">
+                                                <a href="{% url 'read-teacher' teacher.tid %}">
+                                                    {{ teacher.lastname }} {{ teacher.firstname }} {{ teacher.othername }}
+                                                </a>
+                                            </h2>
+                                        </td>
+                                        <td>{{ teacher.role }}</td>
+                                        <td>{{ teacher.gender }}</td>
+                                        <td>{{ teacher.phone }}</td>
+                                        <td class="text-end">
+                                            <div class="actions ">
+                                                <a href="{% url 'read-teacher' teacher.tid %}" class="btn btn-success">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                                <a href="{% url 'edit-teacher' teacher.tid %}" class="btn btn-warning">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <div class="modal fade contentmodal" id="deleteModal" tabindex="-1" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content doctor-profile">
+                                                <div class="modal-header pb-0 border-bottom-0  justify-content-end">
+                                                    <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="delete-wrap text-center">
+                                                        <div class="del-icon"><i class="fas fa-trash"></i></div>
+                                                            <h2>Sure you want to delete <br> {{ teacher.tid }} ?</h2>
+                                                            <div class="submit-section">
+                                                                <a href="{% url "delete-teacher" teacher.tid %}" class="btn btn-success me-2">Yes</a>
+                                                                <a href="{{ request.META.HTTP_REFERER}}" class="btn btn-danger" data-bs-dismiss="modal">No</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

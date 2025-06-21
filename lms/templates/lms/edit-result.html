@@ -1,0 +1,76 @@
+{% extends "lms/layout.html" %}
+{% load static %}
+
+{% block content %}
+
+    <div class="content container-fluid">
+        {% include "lms/page-header.html" %}
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card comman-shadow">
+                    <div class="card-body">
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-12">
+                                    <h5 class="form-title student-info">{{ pagename }}</h5>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Student ID </label>
+                                        <input class="form-control" type="number" placeholder="Enter Student ID" required name="sid" value="{{ result.sid }}">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Class <span class="login-danger" required>*</span></label>
+                                        <select class="form-control select" name="class" value="{{ result.stage }}">
+                                            <option>{{ result.stage }}</option>
+                                            <option>Creche</option>
+                                            <option>Nursery 1</option>
+                                            <option>Nursery 2</option>
+                                            <option>Kndergarten 1</option>
+                                            <option>Kndergarten 2</option>
+                                            <option>Class 1</option>
+                                            <option>Class 2</option>
+                                            <option>Class 3</option>
+                                            <option>Class 4</option>
+                                            <option>Class 5</option>
+                                            <option>Class 6</option>
+                                            <option>JHS 1</option>
+                                            <option>JHS 2</option>
+                                            <option>JHS 3</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Term <span class="login-danger" required>*</span></label>
+                                        <select class="form-control select" name="term" value="{{ result.term }}">
+                                            <option>{{ result.term }}</option>
+                                            <option>Term One</option>
+                                            <option>Term Two</option>
+                                            <option>Term Three</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Report </label>
+                                        <input class="form-control" type="file" name="report" >
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="student-submit">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

@@ -1,0 +1,129 @@
+{% extends "lms/layout.html" %}
+{% load static %}
+
+{% block content %}
+
+    <div class="content container-fluid">
+        {% include "lms/page-header.html" %}
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card comman-shadow">
+                    <div class="card-body">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-12">
+                                    <h5 class="form-title student-info">{{ pagename }} <span><a href="javascript:;"><i class="feather-more-vertical"></i></a></span></h5>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Student ID </label>
+                                        <input class="form-control" type="number" placeholder="Enter Admission ID" required name="sid">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>First Name <span class="login-danger" required>*</span></label>
+                                        <input class="form-control" type="text" placeholder="Enter First Name" name="firstname">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>lastname <span class="login-danger" required>*</span></label>
+                                        <input class="form-control" type="text" placeholder="Enter lastname" name="lastname">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Othernames <span class="login-danger">optional</span></label>
+                                        <input class="form-control" type="text" placeholder="Enter Other Names" name="othername">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Address <span class="login-danger" required>*</span></label>
+                                        <input class="form-control" type="text" placeholder="Enter Address" name="address">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Gender <span class="login-danger" required>*</span></label>
+                                        <select class="form-control select" name="gender">
+                                            <option>Select Gender</option>
+                                            <option>Female</option>
+                                            <option>Male</option>
+                                            <option>Others</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms calendar-icon">
+                                        <label>Date Of Birth <span class="login-danger" required>*</span></label>
+                                        <input class="form-control datetimepicker" type="text" placeholder="DD-MM-YYYY" name="dob">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Blood Group <span class="login-danger" required>*</span></label>
+                                        <select class="form-control select" name="bloodgroup">
+                                            <option>Please Select Group </option>
+                                            <option>B+</option>
+                                            <option>A+</option>
+                                            <option>O+</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Religion <span class="login-danger">optional</span></label>
+                                        <select class="form-control select" name="religion">
+                                            <option>Please Select Religion </option>
+                                            <option>Hindu</option>
+                                            <option>Christian</option>
+                                            <option>Others</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Class <span class="login-danger" required>*</span></label>
+                                        <select class="form-control select" name="class">
+                                            <option>Please Select Class </option>
+                                            <option>12</option>
+                                            <option>11</option>
+                                            <option>10</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Disability <span class="login-danger" required>*</span></label>
+                                        <select class="form-control select" name="disability">
+                                            <option>Select Disability</option>
+                                            <option>None</option>
+                                            <option>Movement</option>
+                                            <option>Hearing</option>
+                                        </select>
+                                    </div>
+                                </div>
+                               
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Phone </label>
+                                        <input class="form-control" type="number" placeholder="Enter Phone Number" name="phone">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="student-submit">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

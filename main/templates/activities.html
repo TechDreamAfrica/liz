@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block content %}
+
+{% include "breadcrumb.html" %}
+
+<section class="event-section fix section-padding pt-0">
+    <div class="container">
+        <div class="row g-4">
+            
+            {% for activity in activities %}
+            <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s">
+                <div class="event-box-items mt-0 box-shadow">
+                    <div class="event-image">
+                        <img src="{{ activity.image.url }}" alt="event-img">
+                        <div class="event-shape">
+                            <img src="{% static 'assets/img/event/shape.png' %}" alt="shape-img">
+                        </div>
+                        <ul class="post-date">
+                            <li>
+                                <i class="fa-solid fa-calendar-days"></i> {{ activity.date_added|date:"M d, Y" }}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="event-content">
+                        <h3>
+                            <a href="{% url 'activity-details' activity.slug %}">{{ activity.title }}</a>
+                        </h3>
+                        <div class="event-author">
+                            <a href="{% url 'activity-details' activity.slug %}" class="theme-btn">View Activity<i class="fa-solid fa-arrow-right-long"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+                
+        </div>
+    </div>
+</section>
+{% endblock content %}

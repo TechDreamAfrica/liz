@@ -1,0 +1,47 @@
+{% load static %}
+
+
+
+<section class="news-section section-padding fix">
+    <div class="container">
+        <div class="news-wrapper">
+    <div class="row align-items-center">
+        {% for blog in blogs %}
+
+        <div class="col-xl-6 col-lg-6 wow fadeInUp" data-wow-delay=".3s">
+            <div class="news-single-items">
+                <div class="news-image">
+                    <img src="{{ blog.image.url }}" alt="news-img">
+                </div>
+                <div class="news-content">
+                    <ul>
+                        <li>
+                            <i class="fa-solid fa-calendar-days"></i> {{ blog.date_posted|date:"M d, Y" }}                          
+                        </li>
+                    </ul>
+                    <h3>
+                        <a href="{% url 'blog-details' blog.slug %}">{{ blog.headline | upper }}</a>
+                    </h3>
+                    <p>
+                        {{ blog.article|truncatewords:30 | safe }}
+                    </p>
+                    <div class="post-author-items">
+                        <div class="post-items">
+                            <div class="content">
+                                <span>By Admin</span>
+                            </div>
+                        </div>
+                        <a href="{% url 'blog-details' blog.slug %}" class="theme-btn">
+                            Read More <i class="fa-solid fa-arrow-right-long"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        {% endfor %}
+                
+    </div>
+</div>
+    </div>
+</section>

@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<section class="program-details-section fix section-padding">
+    <div class="container">
+        <div class="program-details-wrapper">
+            <div class="row g-5">
+                <div class="col-lg-8">
+                    <div class="program-details-items">
+                        <div class="details-image">
+                            <img src="{{ activity.image.url }}" alt="img">
+                        </div>
+                        <div class="details-content">
+                            <div class="post">
+                                <span>{{ activity.date_added|date:"M d, Y" }}</span>
+                            </div>
+                            <h2 class="mb-0">{{ activity.title }}</h2>
+                            <p class="mb-3">
+                                {{ activity.description|safe }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

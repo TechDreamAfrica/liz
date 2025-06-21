@@ -1,0 +1,108 @@
+{% extends "lms/layout.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="content container-fluid">
+    
+    {% include "lms/page-header.html" %}
+
+    <div class="row">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Website Basic Details</h5>
+                        </div>
+                        <div class="card-body pt-0">
+                            <div class="settings-form">
+                                <div class="form-group">
+                                    <p class="settings-label">Logo <span class="star-red">*</span></p>
+                                    <div class="settings-btn">
+                                        <input type="file" accept="image/*" name="logo" id="file" onchange="loadFile(event)" class="hide-input">
+                                        <label for="file" class="upload">
+                                            <i class="fas fa-upload"></i>
+                                        </label>
+                                    </div>
+                                    <h6 class="settings-size">Recommended image size is <span>150px x 150px</span></h6>
+                                    <div class="upload-images">
+                                        <img src="{{ logo.logo.url }}" alt="Image">
+                                        <a href="javascript:void(0);" class="btn-icon logo-hide-btn">
+                                            <i class="fas fa-times"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Contact Details</h5>
+                        </div>
+                        <div class="card-body pt-0">
+                            <div class="settings-form">
+                                    <div class="form-group">
+                                        <label>Contact 1 <span class="star-red">*</span></label>
+                                        <input type="text" class="form-control" placeholder="Enter Contact Line 1" name="contact1" value="{{ contact.contact_one}}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Contact 2 <span class="star-red">*</span></label>
+                                        <input type="text" class="form-control" placeholder="Enter Contact Line 2" name="contact2" value="{{ contact.contact_two}}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Contact 3 <span class="star-red">*</span></label>
+                                        <input type="text" class="form-control" placeholder="Enter Contact Line 3" name="contact3" value="{{ contact.contact_three}}">
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">School Details</h5>
+                        </div>
+                        <div class="card-body pt-0">
+                            <div class="settings-form">
+                                <div class="form-group">
+                                    <label>Image <span class="star-red">*</span></label>
+                                    <input type="file" class="form-control" name="image" name="image">
+                                </div>
+                                <div class="form-group">
+                                    <label>Title <span class="star-red">*</span></label>
+                                    <input type="text" class="form-control" placeholder="Enter Title" name="title" value="{{ about.title }}">
+                                </div>
+                                <div class="form-group">
+                                    <label>About <span class="star-red">*</span></label>
+                                    <textarea class="form-control" name="about">{{ about.about }}</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Mission <span class="star-red">*</span></label>
+                                    <textarea class="form-control" name="mission">{{ about.mission }}</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Vision <span class="star-red">*</span></label>
+                                    <textarea class="form-control" name="vision">{{ about.vision }}</textarea>
+                                </div>
+                                <div class="form-group mb-0">
+                                    <div class="settings-btns">
+                                        <button type="submit" class="btn btn-orange">Update</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

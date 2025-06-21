@@ -1,0 +1,316 @@
+{% extends "lms/layout.html" %}
+{% load static %}
+
+{% block content %}
+
+    <div class="content container-fluid">
+       {% include "lms/page-header.html" %}
+
+        <div class="card">
+            <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="student-profile-head">
+                        <div class="profile-bg-img">
+                            <img src="{% static 'lms/assets/img/profile-bg.jpg' %}" alt="Profile">
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4">
+                                <div class="profile-user-box">
+                                    <div class="profile-user-img">
+                                        <img src="{% static 'lms/assets/img/profile-user.png' %}" alt="Profile">
+                                    </div>
+                                    <div class="names-profiles">
+                                        <h4>{{ results.name }}</h4>
+                                        <h5>Student ID: {{ results.sid }}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 d-flex align-items-center">
+                                <div class="follow-group">
+                                    <div class="students-follows">
+                                        <h5>Class</h5>
+                                        <h4>{{ results.stage }}</h4>
+                                    </div>
+                                    <div class="students-follows">
+                                        <h5>Term</h5>
+                                        <h4>{{ results.term }}</h4>
+                                    </div>
+                                    <div class="students-follows">
+                                        <h5>Position</h5>
+                                        <h4>{{ results.position }}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            {% comment %} <div class="col-lg-4 col-md-4 d-flex align-items-center">
+                                <div class="follow-btn-group">
+                                    <a href="{% url 'download_result' %}" class="btn btn-info follow-btns" target="_blank">Download</a>
+                                    <a href="https://wa.me/{{ student.phone }}" class="btn btn-info message-btns" target="_blank">Share</a>
+                                </div>
+                            </div> {% endcomment %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="student-personals-grp">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="heading-detail">
+                                    <h4>Student Details :</h4>
+                                </div>
+                                <div class="personal-activity">
+                                    <div class="personal-icons">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="views-personal">
+                                        <h4>Name</h4>
+                                        <h5>{{ results.name }}</h5>
+                                    </div>
+                                </div>
+                                <div class="personal-activity">
+                                    <div class="personal-icons">
+                                        <img src="{% static 'lms/assets/img/icons/buliding-icon.svg' %}" alt="">
+                                    </div>
+                                    <div class="views-personal">
+                                        <h4>Class </h4>
+                                        <h5>{{ results.stage }}</h5>
+                                    </div>
+                                </div>
+                                <div class="personal-activity">
+                                    <div class="personal-icons">
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                    <div class="views-personal">
+                                        <h4>Number on Roll</h4>
+                                        <h5>{{ results.number_on_roll }}</h5>
+                                    </div>
+                                </div>
+                                <div class="personal-activity">
+                                    <div class="personal-icons">
+                                        <i class="fas fa-male"></i>
+                                    </div>
+                                    <div class="views-personal">
+                                        <h4>Boys</h4>
+                                        <h5>{{ results.boys }}</h5>
+                                    </div>
+                                </div>
+                                <div class="personal-activity">
+                                    <div class="personal-icons">
+                                        <i class="fas fa-female"></i>
+                                    </div>
+                                    <div class="views-personal">
+                                        <h4>Girls</h4>
+                                        <h5>{{ results.girls }}</h5>
+                                    </div>
+                                </div>
+                                <div class="personal-activity">
+                                    <div class="personal-icons">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="views-personal">
+                                        <h4>attendance</h4>
+                                        <h5>{{ results.attendance }} out of {{ results.total_attendance }}</h5>
+                                    </div>
+                                </div>
+                                <div class="personal-activity">
+                                    <div class="personal-icons">
+                                        <i class="fas fa-calendar"></i>
+                                    </div>
+                                    <div class="views-personal">
+                                        <h4>Academic Year</h4>
+                                        <h5>{{ results.year }}</h5>
+                                    </div>
+                                </div>
+                                <div class="personal-activity">
+                                    <div class="personal-icons">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <div class="views-personal">
+                                        <h4>Teacher's Comment</h4>
+                                        <h5>{{ results.teachers_comment }}</h5>
+                                    </div>
+                                </div>
+                                <div class="personal-activity">
+                                    <div class="personal-icons">
+                                        <i class="fas fa-calendar"></i>
+                                    </div>
+                                    <div class="views-personal">
+                                        <h4>Next Term Begins</h4>
+                                        <h5>{{ results.next_term }}</h5>
+                                    </div>
+                                </div>
+                                <div class="personal-activity">
+                                    <div class="personal-icons">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </div>
+                                    <div class="views-personal">
+                                        <h4>Promoted to</h4>
+                                        <h5>BS {{ results.promoted_to }}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <h4>Academic Records</h4>
+                    <div class="table-responsive">
+                        <table class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">
+                            <thead class="student-thread">
+                                <tr>
+                                    <th>
+                                        NO.
+                                    </th>
+                                    <th>Subject</th>
+                                    <th>Class Score</th>
+                                    <th>Mid Term</th>
+                                    <th>Exams Score</th>
+                                    <th>Total</th>
+                                    <th>Grade</th>
+                                    <th>Comment</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>{{ results.s1 }}</td>
+                                    <td>{{ results.s1ClassScore }}</td>
+                                    <td>{{ results.s1MidTerm }}</td>
+                                    <td>{{ results.s1ExamsScore }}</td>
+                                    <td>{{ results.s1Total }}</td>
+                                    <td>{{ results.s1Grade }}</td>
+                                    <td>{{ results.s1Comment }}</td>
+                                </tr>
+
+                                <tr>
+                                    <td>2</td>
+                                    <td>{{ results.s2 }}</td>
+                                    <td>{{ results.s2ClassScore }}</td>
+                                    <td>{{ results.s2MidTerm }}</td>
+                                    <td>{{ results.s2ExamsScore }}</td>
+                                    <td>{{ results.s2Total }}</td>
+                                    <td>{{ results.s2Grade }}</td>
+                                    <td>{{ results.s2Comment }}</td>
+                                </tr>
+
+                                <tr>
+                                    <td>3</td>
+                                    <td>{{ results.s3 }}</td>
+                                    <td>{{ results.s3ClassScore }}</td>
+                                    <td>{{ results.s3MidTerm }}</td>
+                                    <td>{{ results.s3ExamsScore }}</td>
+                                    <td>{{ results.s3Total }}</td>
+                                    <td>{{ results.s3Grade }}</td>
+                                    <td>{{ results.s3Comment }}</td>
+                                </tr>
+
+                                <tr>
+                                    <td>4</td>
+                                    <td>{{ results.s4 }}</td>
+                                    <td>{{ results.s4ClassScore }}</td>
+                                    <td>{{ results.s4MidTerm }}</td>
+                                    <td>{{ results.s4ExamsScore }}</td>
+                                    <td>{{ results.s4Total }}</td>
+                                    <td>{{ results.s4Grade }}</td>
+                                    <td>{{ results.s4Comment }}</td>
+                                </tr>
+
+                                <tr>
+                                    <td>5</td>
+                                    <td>{{ results.s5 }}</td>
+                                    <td>{{ results.s5ClassScore }}</td>
+                                    <td>{{ results.s5MidTerm }}</td>
+                                    <td>{{ results.s5ExamsScore }}</td>
+                                    <td>{{ results.s5Total }}</td>
+                                    <td>{{ results.s5Grade }}</td>
+                                    <td>{{ results.s5Comment }}</td>
+                                </tr>
+
+                                <tr>
+                                    <td>6</td>
+                                    <td>{{ results.s6 }}</td>
+                                    <td>{{ results.s6ClassScore }}</td>
+                                    <td>{{ results.s6MidTerm }}</td>
+                                    <td>{{ results.s6ExamsScore }}</td>
+                                    <td>{{ results.s6Total }}</td>
+                                    <td>{{ results.s6Grade }}</td>
+                                    <td>{{ results.s6Comment }}</td>
+                                </tr>
+
+                                <tr>
+                                    <td>7</td>
+                                    <td>{{ results.s7 }}</td>
+                                    <td>{{ results.s7ClassScore }}</td>
+                                    <td>{{ results.s7MidTerm }}</td>
+                                    <td>{{ results.s7ExamsScore }}</td>
+                                    <td>{{ results.s7Total }}</td>
+                                    <td>{{ results.s7Grade }}</td>
+                                    <td>{{ results.s7Comment }}</td>
+                                </tr>
+
+                                <tr>
+                                    <td>8</td>
+                                    <td>{{ results.s8 }}</td>
+                                    <td>{{ results.s8ClassScore }}</td>
+                                    <td>{{ results.s8MidTerm }}</td>
+                                    <td>{{ results.s8ExamsScore }}</td>
+                                    <td>{{ results.s8Total }}</td>
+                                    <td>{{ results.s8Grade }}</td>
+                                    <td>{{ results.s8Comment }}</td>
+                                </tr>
+
+                                <tr>
+                                    <td>9</td>
+                                    <td>{{ results.s9 }}</td>
+                                    <td>{{ results.s9ClassScore }}</td>
+                                    <td>{{ results.s9MidTerm }}</td>
+                                    <td>{{ results.s9ExamsScore }}</td>
+                                    <td>{{ results.s9Total }}</td>
+                                    <td>{{ results.s9Grade }}</td>
+                                    <td>{{ results.s9Comment }}</td>
+                                </tr>
+
+                                <tr>
+                                    <td>10</td>
+                                    <td>{{ results.s10 }}</td>
+                                    <td>{{ results.s10ClassScore }}</td>
+                                    <td>{{ results.s10MidTerm }}</td>
+                                    <td>{{ results.s10ExamsScore }}</td>
+                                    <td>{{ results.s10Total }}</td>
+                                    <td>{{ results.s10Grade }}</td>
+                                    <td>{{ results.s10Comment }}</td>
+                                </tr>
+
+                                <tr>
+                                    <td>11</td>
+                                    <td>{{ results.s11 }}</td>
+                                    <td>{{ results.s11ClassScore }}</td>
+                                    <td>{{ results.s11MidTerm }}</td>
+                                    <td>{{ results.s11ExamsScore }}</td>
+                                    <td>{{ results.s11Total }}</td>
+                                    <td>{{ results.s11Grade }}</td>
+                                    <td>{{ results.s11Comment }}</td>
+                                </tr>
+
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>Total</td>
+                                    <td>{{ results.total }}</td>
+                                    <td></td>
+                                    <td></td>
+                                    
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
