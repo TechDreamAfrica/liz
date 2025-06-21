@@ -15,6 +15,7 @@ urlpatterns = [
     path('students/add-student/', add_student, name='add-student'),
     path('students/delete-student/<str:pk>', delete_student, name='delete-student'),
     path('students/edit-student/<str:pk>', edit_student, name='edit-student'),
+    path('students/add-bulk-students/', add_bulk_students, name='add-bulk-students'),
 
 
     path('results', results, name='results'),
@@ -22,6 +23,8 @@ urlpatterns = [
     path('results/add-result', add_result, name='add-result'),
     path('results/edit-result/<str:pk>', edit_result, name='edit-result'),
     path('results/delete-result/<str:pk>', delete_result, name='delete-result'),
+    path('results/add-single-result/', add_single_result, name='add-single-result'),
+
 
     path('teachers', teachers, name='teachers'),
 

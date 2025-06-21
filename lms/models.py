@@ -11,7 +11,6 @@ class Students(models.Model):
     id_user = models.IntegerField()
     password = models.CharField(max_length=100)
     firstname = models.CharField(max_length=100)
-    password = models.CharField(max_length=100)
     lastname = models.CharField(max_length=100)
     gender = models.CharField(max_length=50, blank=True, null=True)
     religion = models.CharField(max_length=50, blank=True, null=True)
@@ -20,7 +19,7 @@ class Students(models.Model):
     address = models.CharField(max_length=50, blank=True, null=True)
     dob = models.CharField(max_length=50, blank=True, null=True)
     disability = models.CharField(max_length=200, blank=True, null=True)
-    blood_group = models.CharField(max_length=200,  blank=True, null=True)
+    blood_group = models.CharField(max_length=200, blank=True, null=True)
     date_admitted = models.DateTimeField(auto_now=True)
     
     class Meta:
@@ -41,12 +40,12 @@ class Teachers(models.Model):
     firstname = models.CharField(max_length=50)
     othername = models.CharField(max_length=50, blank=True, null=True)
     gender = models.CharField(max_length=50, blank=True, null=True)
-    phone = models.IntegerField(blank=True, null=True)
+    phone = models.CharField(max_length=20, blank=True, null=True, default="0")
     address = models.CharField(max_length=50, blank=True, null=True)
     disability = models.CharField(max_length=200, blank=True, null=True)
     date_employed = models.DateTimeField(auto_now=True, blank=True, null=True)
     password = models.CharField(max_length=100)
-    role = models.CharField(max_length = 100, blank=True, null=True)
+    role = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
         ordering = ['-date_employed']
@@ -127,8 +126,8 @@ class Terms(models.Model):
 class Fees(models.Model):
     fid = models.IntegerField()
     fee = models.CharField(max_length=50)
-    term = models.IntegerField()
-    stage = models.IntegerField()
+    term = models.CharField(max_length=50)
+    stage = models.CharField(max_length=50)
     amount = models.FloatField()
     bill_date = models.DateTimeField(auto_now=True)
 
@@ -140,7 +139,7 @@ class Fees(models.Model):
         verbose_name_plural = 'Fees'
 
     def __str__(self):
-        return f"fees for {self.term } Class {self.stage }"
+        return f"fees for {self.term} Class {self.stage}"
 
 
 class FeeCollections(models.Model):
@@ -160,7 +159,7 @@ class FeeCollections(models.Model):
         verbose_name_plural = 'Fee Collections'
 
     def __str__(self):
-        return f"{ self.sid }"
+        return f"{self.sid}"
 
 
 class Expenses(models.Model):
@@ -235,117 +234,24 @@ class TimeTable(models.Model):
         return f"time table"
 
 
-
 class Result(models.Model):
-    sid = models.CharField(max_length=100)
-    stage = models.CharField(max_length=100)
-    name = models.CharField(max_length=100, default=" ")
-    position = models.CharField(max_length=100, default=" ")
-    promoted_to = models.CharField(max_length=100, default=" ")
-    term = models.CharField(max_length=100)
-    year = models.CharField(max_length=100, default=" ")
-    number_on_roll = models.CharField(max_length=100, default=" ")
-    boys = models.CharField(max_length=100, default=" ")
-    girls = models.CharField(max_length=100, default=" ")
-    attendance = models.CharField(max_length=100, default=" ")
-    total_attendance = models.CharField(max_length=100, default=" ")
-    teachers_comment = models.CharField(max_length=300, default=" ")
-    next_term = models.CharField(max_length=100, default=" ")
-    report = models.FileField(upload_to='resultfiles',  default=" ")
-
-    #first subject
-    s1 = models.CharField(max_length=100, default=" ")
-    s1ClassScore = models.CharField(max_length=100, default=" ")
-    s1ExamsScore = models.CharField(max_length=100, default=" ")
-    s1MidTerm = models.CharField(max_length=100, default=" ")
-    s1Total = models.CharField(max_length=100, default=" ")
-    s1Grade = models.CharField(max_length=100, default=" ")
-    s1Comment = models.CharField(max_length=100, default=" ")
-
-    s2 = models.CharField(max_length=100, default=" ")
-    s2ClassScore = models.CharField(max_length=100, default=" ")
-    s2ExamsScore = models.CharField(max_length=100, default=" ")
-    s2MidTerm = models.CharField(max_length=100, default=" ")
-    s2Total = models.CharField(max_length=100, default=" ")
-    s2Grade = models.CharField(max_length=100, default=" ")
-    s2Comment = models.CharField(max_length=100, default=" ")
-
-    s3 = models.CharField(max_length=100, default=" ")
-    s3ClassScore = models.CharField(max_length=100, default=" ")
-    s3ExamsScore = models.CharField(max_length=100, default=" ")
-    s3MidTerm = models.CharField(max_length=100, default=" ")
-    s3Total = models.CharField(max_length=100, default=" ")
-    s3Grade = models.CharField(max_length=100, default=" ")
-    s3Comment = models.CharField(max_length=100, default=" ")
-
-    s4 = models.CharField(max_length=100, default=" ")
-    s4ClassScore = models.CharField(max_length=100, default=" ")
-    s4ExamsScore = models.CharField(max_length=100, default=" ")
-    s4MidTerm = models.CharField(max_length=100, default=" ")
-    s4Total = models.CharField(max_length=100, default=" ")
-    s4Grade = models.CharField(max_length=100, default=" ")
-    s4Comment = models.CharField(max_length=100, default=" ")
-
-    s5 = models.CharField(max_length=100, default=" ")
-    s5ClassScore = models.CharField(max_length=100, default=" ")
-    s5ExamsScore = models.CharField(max_length=100, default=" ")
-    s5MidTerm = models.CharField(max_length=100, default=" ")
-    s5Total = models.CharField(max_length=100, default=" ")
-    s5Grade = models.CharField(max_length=100, default=" ")
-    s5Comment = models.CharField(max_length=100, default=" ")
-
-    s6 = models.CharField(max_length=100, default=" ")
-    s6ClassScore = models.CharField(max_length=100, default=" ")
-    s6ExamsScore = models.CharField(max_length=100, default=" ")
-    s6MidTerm = models.CharField(max_length=100, default=" ")
-    s6Total = models.CharField(max_length=100, default=" ")
-    s6Grade = models.CharField(max_length=100, default=" ")
-    s6Comment = models.CharField(max_length=100, default=" ")
-
-    s7 = models.CharField(max_length=100, default=" ")
-    s7ClassScore = models.CharField(max_length=100, default=" ")
-    s7ExamsScore = models.CharField(max_length=100, default=" ")
-    s7MidTerm = models.CharField(max_length=100, default=" ")
-    s7Total = models.CharField(max_length=100, default=" ")
-    s7Grade = models.CharField(max_length=100, default=" ")
-    s7Comment = models.CharField(max_length=100, default=" ")
-
-    s8 = models.CharField(max_length=100, default=" ")
-    s8ClassScore = models.CharField(max_length=100, default=" ")
-    s8ExamsScore = models.CharField(max_length=100, default=" ")
-    s8MidTerm = models.CharField(max_length=100, default=" ")
-    s8Total = models.CharField(max_length=100, default=" ")
-    s8Grade = models.CharField(max_length=100, default=" ")
-    s8Comment = models.CharField(max_length=100, default=" ")
-
-    s9 = models.CharField(max_length=100, default=" ")
-    s9ClassScore = models.CharField(max_length=100, default=" ")
-    s9ExamsScore = models.CharField(max_length=100, default=" ")
-    s9MidTerm = models.CharField(max_length=100, default=" ")
-    s9Total = models.CharField(max_length=100, default=" ")
-    s9Grade = models.CharField(max_length=100, default=" ")
-    s9Comment = models.CharField(max_length=100, default=" ")
-
-    s10 = models.CharField(max_length=100, default=" ")
-    s10ClassScore = models.CharField(max_length=100, default=" ")
-    s10ExamsScore = models.CharField(max_length=100, default=" ")
-    s10MidTerm = models.CharField(max_length=100, default=" ")
-    s10Total = models.CharField(max_length=100, default=" ")
-    s10Grade = models.CharField(max_length=100, default=" ")
-    s10Comment = models.CharField(max_length=100, default=" ")
-
-    s11 = models.CharField(max_length=100, default=" ")
-    s11ClassScore = models.CharField(max_length=100, default=" ")
-    s11ExamsScore = models.CharField(max_length=100, default=" ")
-    s11MidTerm = models.CharField(max_length=100, default=" ")
-    s11Total = models.CharField(max_length=100, default=" ")
-    s11Grade = models.CharField(max_length=100, default=" ")
-    s11Comment = models.CharField(max_length=100, default=" ")
-
-    total = models.CharField(max_length=100, default=" ")
-
-    added_by = models.CharField(max_length=100, default='Admin')
-    date_added = models.DateTimeField(auto_now = True)
+    sid = models.CharField(max_length=100)  # Student ID
+    stage = models.CharField(max_length=100)  # Class/Stage
+    name = models.CharField(max_length=100)  # Student Name
+    position = models.CharField(max_length=100, blank=True, null=True)  # Position in class
+    promoted_to = models.CharField(max_length=100, blank=True, null=True)  # Promoted to
+    term = models.CharField(max_length=100)  # Term
+    number_on_roll = models.PositiveIntegerField(default=0)  # Number on roll
+    boys = models.PositiveIntegerField(default=0)  # Number of boys
+    girls = models.PositiveIntegerField(default=0)  # Number of girls
+    attendance = models.CharField(max_length=100, blank=True, null=True)  # Attendance
+    teachers_comment = models.CharField(max_length=300, blank=True, null=True)  # Teacher's comment
+    next_term = models.CharField(max_length=100, blank=True, null=True)  # Next term date
+    subject = models.CharField(max_length=100)  # Subject name
+    class_score = models.FloatField(default=0.0)  # Class score
+    exam_score = models.FloatField(default=0.0)  # Exam score
+    total_score = models.FloatField(default=0.0)  # Total score
+    date_added = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ['-date_added']
@@ -354,8 +260,12 @@ class Result(models.Model):
         verbose_name = 'Result'
         verbose_name_plural = 'Results'
 
+    def save(self, *args, **kwargs):
+        self.total_score = self.class_score + self.exam_score
+        super().save(*args, **kwargs)
+
     def __str__(self):
-        return f"ID: { self.sid }, Class: { self.stage }, { self.term } Term Result"
+        return f"ID: {self.sid}, Class: {self.stage}, {self.term} Term, Subject: {self.subject}"
 
 
 class TeacherAttendances(models.Model):

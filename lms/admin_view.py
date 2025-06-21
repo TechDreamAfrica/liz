@@ -5,7 +5,9 @@ from .models import *
 from main.models import *
 from django.contrib.auth.models import User, auth
 from . import views
-# import pandas as pd
+import pandas as pd
+from django.core.files.storage import FileSystemStorage
+from django.http import HttpResponse
 
 
 # Create your views here.
@@ -1245,5 +1247,102 @@ def compose(request):
         'allInbox':allInbox
     }
     return render(request, 'lms/compose.html', context)
+
+
+@login_required(login_url='admin-login')
+def add_bulk_students(request):
+    pagename = "Add Bulk Students"
+    stage = Stages.objects.all()
+    message = None
+    if request.method == "POST" and request.FILES.get('excel_file'):
+        excel_file = request.FILES['excel_file']
+        fs = FileSystemStorage()
+        filename = fs.save(excel_file.name, excel_file)
+        file_path = fs.path(filename)
+        try:
+            df = pd.read_excel(file_path)
+            for _, row in df.iterrows():
+                username = str(row.get('sid', '')).strip()
+                lastname = str(row.get('lastname', '')).strip().upper()
+                firstname = str(row.get('firstname', '')).strip().upper()
+                gender = str(row.get('gender', '')).strip().upper()
+                dob = str(row.get('dob', '')).strip()
+                religion = str(row.get('religion', '')).strip().upper()
+                phone = str(row.get('phone', ''))
+                blood_group = str(row.get('blood_group', '')).strip().upper()
+                stage_val = str(row.get('stage', '')).strip().upper()
+                address = str(row.get('address', '')).strip().upper()
+                disability = str(row.get('disability', '')).strip().upper()
+                password = username
+                if not User.objects.filter(username=username).exists():
+                    user = User.objects.create_user(username=username, password=password, first_name=firstname, last_name=lastname)
+                    user.save()
+                    Students.objects.create(
+                        firstname=firstname, lastname=lastname,
+                        user=user, password=password,
+                        id_user=user.id,
+                        gender=gender, dob=dob,
+                        religion=religion, phone=phone,
+                        blood_group=blood_group, stage=stage_val,
+                        address=address, disability=disability)
+            message = 'Bulk students added successfully.'
+        except Exception as e:
+            message = f'Error processing file: {e}'
+        fs.delete(filename)
+    context = {
+        'pagename': pagename,
+        'stages': stage,
+        'message': message
+    }
+    return render(request, 'lms/add-bulk-students.html', context)
+
+
+@login_required(login_url='admin-login')
+def add_single_result(request):
+    pagename = "Add Single Result"
+    message = None
+    if request.method == "POST":
+        sid = request.POST.get('sid')
+        stage = request.POST.get('stage')
+        name = request.POST.get('name')
+        position = request.POST.get('position')
+        promoted_to = request.POST.get('promoted_to')
+        term = request.POST.get('term')
+        number_on_roll = request.POST.get('number_on_roll')
+        boys = request.POST.get('boys')
+        girls = request.POST.get('girls')
+        attendance = request.POST.get('attendance')
+        teachers_comment = request.POST.get('teachers_comment')
+        next_term = request.POST.get('next_term')
+        subject = request.POST.get('subject')
+        class_score = request.POST.get('class_score')
+        exam_score = request.POST.get('exam_score')
+        try:
+            result = Result.objects.create(
+                sid=sid,
+                stage=stage,
+                name=name,
+                position=position,
+                promoted_to=promoted_to,
+                term=term,
+                number_on_roll=number_on_roll or 0,
+                boys=boys or 0,
+                girls=girls or 0,
+                attendance=attendance,
+                teachers_comment=teachers_comment,
+                next_term=next_term,
+                subject=subject,
+                class_score=float(class_score or 0),
+                exam_score=float(exam_score or 0),
+            )
+            result.save()
+            message = 'Result added successfully.'
+        except Exception as e:
+            message = f'Error adding result: {e}'
+    context = {
+        'pagename': pagename,
+        'message': message
+    }
+    return render(request, 'lms/add-single-result.html', context)
 
 

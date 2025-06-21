@@ -1,0 +1,22 @@
+{% extends 'lms/layout.html' %} {% block content %}
+<div class="container mt-4">
+  <h2>{{ pagename }}</h2>
+  {% if message %}
+  <div class="alert alert-info">{{ message }}</div>
+  {% endif %}
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="excel_file">Select Excel File (.xlsx):</label>
+      <input
+        type="file"
+        name="excel_file"
+        id="excel_file"
+        class="form-control"
+        required
+      />
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Upload</button>
+  </form>
+</div>
+{% endblock %}

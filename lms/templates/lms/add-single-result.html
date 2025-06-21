@@ -1,0 +1,88 @@
+{% extends 'lms/layout.html' %} {% block content %}
+<div class="container mt-4">
+  <h2>{{ pagename }}</h2>
+  {% if message %}
+  <div class="alert alert-info">{{ message }}</div>
+  {% endif %}
+  <form method="post">
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="sid">Student ID</label>
+          <input type="text" name="sid" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label for="stage">Class/Stage</label>
+          <input type="text" name="stage" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label for="name">Student Name</label>
+          <input type="text" name="name" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label for="position">Position in Class</label>
+          <input type="text" name="position" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label for="promoted_to">Promoted To</label>
+          <input type="text" name="promoted_to" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label for="term">Term</label>
+          <input type="text" name="term" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label for="number_on_roll">Number on Roll</label>
+          <input type="number" name="number_on_roll" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label for="boys">Number of Boys</label>
+          <input type="number" name="boys" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label for="girls">Number of Girls</label>
+          <input type="number" name="girls" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label for="attendance">Attendance</label>
+          <input type="text" name="attendance" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label for="teachers_comment">Teacher's Comment</label>
+          <input type="text" name="teachers_comment" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label for="next_term">Next Term Date</label>
+          <input type="text" name="next_term" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <input type="text" name="subject" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label for="class_score">Class Score</label>
+          <input
+            type="number"
+            step="0.01"
+            name="class_score"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="exam_score">Exam Score</label>
+          <input
+            type="number"
+            step="0.01"
+            name="exam_score"
+            class="form-control"
+            required
+          />
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-success mt-3">Add Result</button>
+  </form>
+</div>
+{% endblock %}
