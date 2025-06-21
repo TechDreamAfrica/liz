@@ -5,9 +5,12 @@ from .models import *
 from main.models import *
 from django.contrib.auth.models import User, auth
 from . import views
-import pandas as pd
+# import pandas as pd
 from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponse
+from django.template.loader import render_to_string
+from xhtml2pdf import pisa
+import io
 
 
 
@@ -396,7 +399,6 @@ def add_teacher(request):
     subject = Subjects.objects.all()
     stage = Stages.objects.all()
     pagename = "Add Teacher Information"
-
 
 
     if request.method == "POST":
@@ -1379,5 +1381,24 @@ def add_result(request):
         'message': message
     }
     return render(request, 'lms/add-bulk-results.html', context)
+
+
+@login_required(login_url='admin-login')
+def download_result_pdf(request, pk):
+    result = Result.objects.get(id=pk)
+    pagename = f"Results | { result.sid }"
+    context = {
+        'pagename': pagename,
+        'results': result
+    }
+    html = render_to_string('lms/result-pdf.html', context)
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="result_{result.sid}_{result.id}.pdf"'
+    pisa_status = pisa.CreatePDF(
+        io.BytesIO(html.encode('utf-8')), dest=response, encoding='utf-8'
+    )
+    if pisa_status.err:
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
 
 

@@ -24,6 +24,7 @@ urlpatterns = [
     path('results/edit-result/<str:pk>', edit_result, name='edit-result'),
     path('results/delete-result/<str:pk>', delete_result, name='delete-result'),
     path('results/add-single-result/', add_single_result, name='add-single-result'),
+    path('results/download-pdf/<int:pk>/', download_result_pdf, name='download-result-pdf'),
 
 
     path('teachers', teachers, name='teachers'),

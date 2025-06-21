@@ -1,0 +1,40 @@
+{% extends 'lms/layout.html' %} {% block content %}
+<div class="container mt-4">
+  <h2>{{ pagename }}</h2>
+  <hr />
+  <h4>Student: {{ results.name }} ({{ results.sid }})</h4>
+  <p><strong>Class/Stage:</strong> {{ results.stage }}</p>
+  <p><strong>Term:</strong> {{ results.term }}</p>
+  <p><strong>Subject:</strong> {{ results.subject }}</p>
+  <p><strong>Position:</strong> {{ results.position }}</p>
+  <p><strong>Promoted To:</strong> {{ results.promoted_to }}</p>
+  <p><strong>Number on Roll:</strong> {{ results.number_on_roll }}</p>
+  <p>
+    <strong>Boys:</strong> {{ results.boys }} | <strong>Girls:</strong> {{
+    results.girls }}
+  </p>
+  <p><strong>Attendance:</strong> {{ results.attendance }}</p>
+  <p><strong>Teacher's Comment:</strong> {{ results.teachers_comment }}</p>
+  <p><strong>Next Term Date:</strong> {{ results.next_term }}</p>
+  <hr />
+  <h5>Scores</h5>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Subject</th>
+        <th>Class Score</th>
+        <th>Exam Score</th>
+        <th>Total Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ results.subject }}</td>
+        <td>{{ results.class_score }}</td>
+        <td>{{ results.exam_score }}</td>
+        <td>{{ results.total_score }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+{% endblock %}
