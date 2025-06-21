@@ -1237,37 +1237,39 @@ def add_bulk_students(request):
     pagename = "Add Bulk Students"
     stage = Stages.objects.all()
     message = None
-    if request.method == "POST" and request.FILES.get('excel_file'):
-        excel_file = request.FILES['excel_file']
+    if request.method == "POST" and request.FILES.get('csv_file'):
+        csv_file = request.FILES['csv_file']
         fs = FileSystemStorage()
-        filename = fs.save(excel_file.name, excel_file)
+        filename = fs.save(csv_file.name, csv_file)
         file_path = fs.path(filename)
+        import csv
         try:
-            df = pd.read_excel(file_path)
-            for _, row in df.iterrows():
-                username = str(row.get('sid', '')).strip()
-                lastname = str(row.get('lastname', '')).strip().upper()
-                firstname = str(row.get('firstname', '')).strip().upper()
-                gender = str(row.get('gender', '')).strip().upper()
-                dob = str(row.get('dob', '')).strip()
-                religion = str(row.get('religion', '')).strip().upper()
-                phone = str(row.get('phone', ''))
-                blood_group = str(row.get('blood_group', '')).strip().upper()
-                stage_val = str(row.get('stage', '')).strip().upper()
-                address = str(row.get('address', '')).strip().upper()
-                disability = str(row.get('disability', '')).strip().upper()
-                password = username
-                if not User.objects.filter(username=username).exists():
-                    user = User.objects.create_user(username=username, password=password, first_name=firstname, last_name=lastname)
-                    user.save()
-                    Students.objects.create(
-                        firstname=firstname, lastname=lastname,
-                        user=user, password=password,
-                        id_user=user.id,
-                        gender=gender, dob=dob,
-                        religion=religion, phone=phone,
-                        blood_group=blood_group, stage=stage_val,
-                        address=address, disability=disability)
+            with open(file_path, newline='', encoding='utf-8') as f:
+                reader = csv.DictReader(f)
+                for row in reader:
+                    username = str(row.get('sid', '')).strip()
+                    lastname = str(row.get('lastname', '')).strip().upper()
+                    firstname = str(row.get('firstname', '')).strip().upper()
+                    gender = str(row.get('gender', '')).strip().upper()
+                    dob = str(row.get('dob', '')).strip()
+                    religion = str(row.get('religion', '')).strip().upper()
+                    phone = str(row.get('phone', ''))
+                    blood_group = str(row.get('blood_group', '')).strip().upper()
+                    stage_val = str(row.get('stage', '')).strip().upper()
+                    address = str(row.get('address', '')).strip().upper()
+                    disability = str(row.get('disability', '')).strip().upper()
+                    password = username
+                    if not User.objects.filter(username=username).exists():
+                        user = User.objects.create_user(username=username, password=password, first_name=firstname, last_name=lastname)
+                        user.save()
+                        Students.objects.create(
+                            firstname=firstname, lastname=lastname,
+                            user=user, password=password,
+                            id_user=user.id,
+                            gender=gender, dob=dob,
+                            religion=religion, phone=phone,
+                            blood_group=blood_group, stage=stage_val,
+                            address=address, disability=disability)
             message = 'Bulk students added successfully.'
         except Exception as e:
             message = f'Error processing file: {e}'

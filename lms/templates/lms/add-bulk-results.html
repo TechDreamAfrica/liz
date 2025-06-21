@@ -7,7 +7,7 @@
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="form-group">
-      <label for="excel_file">Select Excel File (.xlsx):</label>
+      <label for="excel_file">Select Excel File (.csv):</label>
       <input
         type="file"
         name="csv_file"
@@ -15,6 +15,12 @@
         class="form-control"
         required
       />
+      <a
+        href="/static/lms/bulk_result_template.csv"
+        download
+        class="btn btn-outline-secondary btn-sm mt-2"
+        >Download CSV Template</a
+      >
     </div>
     <button type="submit" class="btn btn-primary mt-2">Upload</button>
   </form>
