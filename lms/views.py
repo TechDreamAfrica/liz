@@ -1024,105 +1024,6 @@ def edit_result(request, pk):
     }
     return render(request, 'lms/edit-result.html', context)
 
-
-@login_required(login_url='admin-login')
-def add_result(request):
-    user_object = User.objects.get(username=request.user.username)
-    pagename = "Add Result"
-    if request.method == "POST":
-        report = request.FILES.get('report')
-
-        # work_sheet = pd.read_excel(report)
-        # # print(work_sheet.iloc[9, 4])
-
-        # if work_sheet.iloc[9, 4] == "Class: B.S 7" or work_sheet.iloc[9, 4] == "Class: B.S 8" or work_sheet.iloc[9, 4] == "Class: B.S ":
-        #     result = Result.objects.create(
-        #         name=work_sheet.iloc[9,3], sid=work_sheet.iloc[11,5], stage=work_sheet.iloc[9,4], term=work_sheet.iloc[11,4], total_attendance=work_sheet.iloc[33,5],
-        #         promoted_to=work_sheet.iloc[9,5], next_term=work_sheet.iloc[13,3], number_on_roll=work_sheet.iloc[16,5], year=work_sheet.iloc[13,5],
-        #         boys=work_sheet.iloc[16,3], girls=work_sheet.iloc[11,7], attendance=work_sheet.iloc[33,3], position=work_sheet.iloc[30,4], teachers_comment=work_sheet.iloc[37,3],
-
-        #         s1=work_sheet.iloc[19,2], s1ExamsScore=work_sheet.iloc[19,3],
-        #         s1Total=work_sheet.iloc[19,3], s1Grade=work_sheet.iloc[19,4], s1Comment=work_sheet.iloc[19,5],
-
-        #         s2=work_sheet.iloc[20,2], s2ExamsScore=work_sheet.iloc[20,3],
-        #         s2Total=work_sheet.iloc[20,3], s2Grade=work_sheet.iloc[20,4], s2Comment=work_sheet.iloc[20,5],
-
-        #         s3=work_sheet.iloc[21,2], s3ExamsScore=work_sheet.iloc[21,3],
-        #         s3Total=work_sheet.iloc[21,3], s3Grade=work_sheet.iloc[21,4], s3Comment=work_sheet.iloc[21,5],
-
-        #         s4=work_sheet.iloc[22,2], s4ExamsScore=work_sheet.iloc[22,3],
-        #         s4Total=work_sheet.iloc[22,3], s4Grade=work_sheet.iloc[22,4], s4Comment=work_sheet.iloc[22,5],
-
-        #         s5=work_sheet.iloc[23,2], s5ExamsScore=work_sheet.iloc[23,3],
-        #         s5Total=work_sheet.iloc[23,3], s5Grade=work_sheet.iloc[23,4], s5Comment=work_sheet.iloc[23,5],
-
-        #         s6=work_sheet.iloc[24,2], s6ExamsScore=work_sheet.iloc[24,3],
-        #         s6Total=work_sheet.iloc[24,3], s6Grade=work_sheet.iloc[24,4], s6Comment=work_sheet.iloc[24,5],
-
-        #         s7=work_sheet.iloc[25,2], s7ExamsScore=work_sheet.iloc[25,3],
-        #         s7Total=work_sheet.iloc[25,3], s7Grade=work_sheet.iloc[25,4], s7Comment=work_sheet.iloc[25,5],
-
-        #         s8=work_sheet.iloc[26,2], s8ExamsScore=work_sheet.iloc[26,3],
-        #         s8Total=work_sheet.iloc[26,3], s8Grade=work_sheet.iloc[26,4], s8Comment=work_sheet.iloc[26,5],
-
-        #         s9=work_sheet.iloc[27,2], s9ExamsScore=work_sheet.iloc[27,3],
-        #         s9Total=work_sheet.iloc[27,3], s9Grade=work_sheet.iloc[27,4], s9Comment=work_sheet.iloc[27,5],
-
-        #         s10=work_sheet.iloc[28,2], s10ExamsScore=work_sheet.iloc[28,3],
-        #         s10Total=work_sheet.iloc[28,3], s10Grade=work_sheet.iloc[28,4], s10Comment=work_sheet.iloc[28,5],
-
-        #         total=work_sheet.iloc[25,5]
-        # )
-        #     result.save()
-        #     messages.success(request, 'File Uploaded successfully')
-        # else:
-        #     result = Result.objects.create(
-        #         name=work_sheet.iloc[7,2], sid=work_sheet.iloc[11,2], stage=work_sheet.iloc[7,5], term=work_sheet.iloc[9,6], total_attendance=work_sheet.iloc[28,4],
-        #         promoted_to=work_sheet.iloc[7,7], next_term=work_sheet.iloc[9,2], number_on_roll=work_sheet.iloc[9,5], year=work_sheet.iloc[9,7],
-        #         boys=work_sheet.iloc[11,5], girls=work_sheet.iloc[11,7], attendance=work_sheet.iloc[28,2], position=work_sheet.iloc[28,7], teachers_comment=work_sheet.iloc[30,3],
-
-        #         s1=work_sheet.iloc[14,1], s1ClassScore=work_sheet.iloc[14,2], s1MidTerm=work_sheet.iloc[14,3], s1ExamsScore=work_sheet.iloc[14,4],
-        #         s1Total=work_sheet.iloc[14,5], s1Grade=work_sheet.iloc[14,6], s1Comment=work_sheet.iloc[14,7],
-
-        #         s2=work_sheet.iloc[15,1], s2ClassScore=work_sheet.iloc[15,2], s2MidTerm=work_sheet.iloc[15,3], s2ExamsScore=work_sheet.iloc[15,4],
-        #         s2Total=work_sheet.iloc[15,5], s2Grade=work_sheet.iloc[15,6], s2Comment=work_sheet.iloc[15,7],
-
-        #         s3=work_sheet.iloc[16,1], s3ClassScore=work_sheet.iloc[16,2], s3MidTerm=work_sheet.iloc[16,3], s3ExamsScore=work_sheet.iloc[16,4],
-        #         s3Total=work_sheet.iloc[16,5], s3Grade=work_sheet.iloc[16,6], s3Comment=work_sheet.iloc[16,7],
-
-        #         s4=work_sheet.iloc[17,1], s4ClassScore=work_sheet.iloc[17,2], s4MidTerm=work_sheet.iloc[17,3], s4ExamsScore=work_sheet.iloc[17,4],
-        #         s4Total=work_sheet.iloc[17,5], s4Grade=work_sheet.iloc[17,6], s4Comment=work_sheet.iloc[17,7],
-
-        #         s5=work_sheet.iloc[18,1], s5ClassScore=work_sheet.iloc[18,2], s5MidTerm=work_sheet.iloc[18,3], s5ExamsScore=work_sheet.iloc[18,4],
-        #         s5Total=work_sheet.iloc[18,5], s5Grade=work_sheet.iloc[18,6], s5Comment=work_sheet.iloc[18,7],
-
-        #         s6=work_sheet.iloc[19,1], s6ClassScore=work_sheet.iloc[19,2], s6MidTerm=work_sheet.iloc[19,3], s6ExamsScore=work_sheet.iloc[19,4],
-        #         s6Total=work_sheet.iloc[19,5], s6Grade=work_sheet.iloc[19,6], s6Comment=work_sheet.iloc[19,7],
-
-        #         s7=work_sheet.iloc[20,1], s7ClassScore=work_sheet.iloc[20,2], s7MidTerm=work_sheet.iloc[20,3], s7ExamsScore=work_sheet.iloc[20,4],
-        #         s7Total=work_sheet.iloc[20,5], s7Grade=work_sheet.iloc[20,6], s7Comment=work_sheet.iloc[20,7],
-
-        #         s8=work_sheet.iloc[21,1], s8ClassScore=work_sheet.iloc[21,2], s8MidTerm=work_sheet.iloc[21,3], s8ExamsScore=work_sheet.iloc[21,4],
-        #         s8Total=work_sheet.iloc[21,5], s8Grade=work_sheet.iloc[21,6], s8Comment=work_sheet.iloc[21,7],
-
-        #         s9=work_sheet.iloc[22,1], s9ClassScore=work_sheet.iloc[22,2], s9MidTerm=work_sheet.iloc[22,3], s9ExamsScore=work_sheet.iloc[22,4],
-        #         s9Total=work_sheet.iloc[22,5], s9Grade=work_sheet.iloc[22,6], s9Comment=work_sheet.iloc[22,7],
-
-        #         s10=work_sheet.iloc[23,1], s10ClassScore=work_sheet.iloc[23,2], s10MidTerm=work_sheet.iloc[23,3], s10ExamsScore=work_sheet.iloc[23,4],
-        #         s10Total=work_sheet.iloc[23,5], s10Grade=work_sheet.iloc[23,6], s10Comment=work_sheet.iloc[23,7],
-
-        #         total=work_sheet.iloc[25,5]
-        # )
-        #     result.save()
-        #     messages.success(request, 'File Uploaded successfully')
-
-
-    context = {
-        'pagename':pagename,
-    }
-    return render(request, 'lms/add-result.html', context)
-
-
 @login_required(login_url='admin-login')
 def delete_result(request, pk):
     result = Result.objects.get(id=pk)
@@ -1419,5 +1320,64 @@ def add_single_result(request):
         'message': message
     }
     return render(request, 'lms/add-single-result.html', context)
+
+
+@login_required(login_url='admin-login')
+def add_result(request):
+    pagename = "Add Bulk Results"
+    message = None
+    if request.method == "POST" and request.FILES.get('excel_file'):
+        excel_file = request.FILES['excel_file']
+        fs = FileSystemStorage()
+        filename = fs.save(excel_file.name, excel_file)
+        file_path = fs.path(filename)
+        try:
+            df = pd.read_excel(file_path)
+            for _, row in df.iterrows():
+                sid = str(row.get('sid', '')).strip()
+                stage = str(row.get('stage', '')).strip()
+                name = str(row.get('name', '')).strip()
+                position = str(row.get('position', '')).strip()
+                promoted_to = str(row.get('promoted_to', '')).strip()
+                term = str(row.get('term', '')).strip()
+                number_on_roll = int(row.get('number_on_roll', 0) or 0)
+                boys = int(row.get('boys', 0) or 0)
+                girls = int(row.get('girls', 0) or 0)
+                attendance = str(row.get('attendance', '')).strip()
+                teachers_comment = str(row.get('teachers_comment', '')).strip()
+                next_term = str(row.get('next_term', '')).strip()
+                subject = str(row.get('subject', '')).strip()
+                class_score = float(row.get('class_score', 0) or 0)
+                exam_score = float(row.get('exam_score', 0) or 0)
+                try:
+                    Result.objects.create(
+                        sid=sid,
+                        stage=stage,
+                        name=name,
+                        position=position,
+                        promoted_to=promoted_to,
+                        term=term,
+                        number_on_roll=number_on_roll,
+                        boys=boys,
+                        girls=girls,
+                        attendance=attendance,
+                        teachers_comment=teachers_comment,
+                        next_term=next_term,
+                        subject=subject,
+                        class_score=class_score,
+                        exam_score=exam_score
+                    )
+                except Exception as e:
+                    # Optionally collect errors for each row
+                    continue
+            message = 'Bulk results added successfully.'
+        except Exception as e:
+            message = f'Error processing file: {e}'
+        fs.delete(filename)
+    context = {
+        'pagename': pagename,
+        'message': message
+    }
+    return render(request, 'lms/add-bulk-results.html', context)
 
 
