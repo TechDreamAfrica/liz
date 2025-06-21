@@ -1333,50 +1333,51 @@ def add_single_result(request):
 def add_result(request):
     pagename = "Add Bulk Results"
     message = None
-    if request.method == "POST" and request.FILES.get('excel_file'):
-        excel_file = request.FILES['excel_file']
+    if request.method == "POST" and request.FILES.get('csv_file'):
+        csv_file = request.FILES['csv_file']
         fs = FileSystemStorage()
-        filename = fs.save(excel_file.name, excel_file)
+        filename = fs.save(csv_file.name, csv_file)
         file_path = fs.path(filename)
+        import csv
         try:
-            df = pd.read_excel(file_path)
-            for _, row in df.iterrows():
-                sid = str(row.get('sid', '')).strip()
-                stage = str(row.get('stage', '')).strip()
-                name = str(row.get('name', '')).strip()
-                position = str(row.get('position', '')).strip()
-                promoted_to = str(row.get('promoted_to', '')).strip()
-                term = str(row.get('term', '')).strip()
-                number_on_roll = int(row.get('number_on_roll', 0) or 0)
-                boys = int(row.get('boys', 0) or 0)
-                girls = int(row.get('girls', 0) or 0)
-                attendance = str(row.get('attendance', '')).strip()
-                teachers_comment = str(row.get('teachers_comment', '')).strip()
-                next_term = str(row.get('next_term', '')).strip()
-                subject = str(row.get('subject', '')).strip()
-                class_score = float(row.get('class_score', 0) or 0)
-                exam_score = float(row.get('exam_score', 0) or 0)
-                try:
-                    Result.objects.create(
-                        sid=sid,
-                        stage=stage,
-                        name=name,
-                        position=position,
-                        promoted_to=promoted_to,
-                        term=term,
-                        number_on_roll=number_on_roll,
-                        boys=boys,
-                        girls=girls,
-                        attendance=attendance,
-                        teachers_comment=teachers_comment,
-                        next_term=next_term,
-                        subject=subject,
-                        class_score=class_score,
-                        exam_score=exam_score
-                    )
-                except Exception as e:
-                    # Optionally collect errors for each row
-                    continue
+            with open(file_path, newline='', encoding='utf-8') as f:
+                reader = csv.DictReader(f)
+                for row in reader:
+                    sid = str(row.get('sid', '')).strip()
+                    stage = str(row.get('stage', '')).strip()
+                    name = str(row.get('name', '')).strip()
+                    position = str(row.get('position', '')).strip()
+                    promoted_to = str(row.get('promoted_to', '')).strip()
+                    term = str(row.get('term', '')).strip()
+                    number_on_roll = int(row.get('number_on_roll', 0) or 0)
+                    boys = int(row.get('boys', 0) or 0)
+                    girls = int(row.get('girls', 0) or 0)
+                    attendance = str(row.get('attendance', '')).strip()
+                    teachers_comment = str(row.get('teachers_comment', '')).strip()
+                    next_term = str(row.get('next_term', '')).strip()
+                    subject = str(row.get('subject', '')).strip()
+                    class_score = float(row.get('class_score', 0) or 0)
+                    exam_score = float(row.get('exam_score', 0) or 0)
+                    try:
+                        Result.objects.create(
+                            sid=sid,
+                            stage=stage,
+                            name=name,
+                            position=position,
+                            promoted_to=promoted_to,
+                            term=term,
+                            number_on_roll=number_on_roll,
+                            boys=boys,
+                            girls=girls,
+                            attendance=attendance,
+                            teachers_comment=teachers_comment,
+                            next_term=next_term,
+                            subject=subject,
+                            class_score=class_score,
+                            exam_score=exam_score
+                        )
+                    except Exception as e:
+                        continue
             message = 'Bulk results added successfully.'
         except Exception as e:
             message = f'Error processing file: {e}'
