@@ -1,40 +1,212 @@
-{% extends 'lms/layout.html' %} {% block content %}
-<div class="container mt-4">
-  <h2>{{ pagename }}</h2>
-  <hr />
-  <h4>Student: {{ results.name }} ({{ results.sid }})</h4>
-  <p><strong>Class/Stage:</strong> {{ results.stage }}</p>
-  <p><strong>Term:</strong> {{ results.term }}</p>
-  <p><strong>Subject:</strong> {{ results.subject }}</p>
-  <p><strong>Position:</strong> {{ results.position }}</p>
-  <p><strong>Promoted To:</strong> {{ results.promoted_to }}</p>
-  <p><strong>Number on Roll:</strong> {{ results.number_on_roll }}</p>
-  <p>
-    <strong>Boys:</strong> {{ results.boys }} | <strong>Girls:</strong> {{
-    results.girls }}
-  </p>
-  <p><strong>Attendance:</strong> {{ results.attendance }}</p>
-  <p><strong>Teacher's Comment:</strong> {{ results.teachers_comment }}</p>
-  <p><strong>Next Term Date:</strong> {{ results.next_term }}</p>
-  <hr />
-  <h5>Scores</h5>
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>Subject</th>
-        <th>Class Score</th>
-        <th>Exam Score</th>
-        <th>Total Score</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>{{ results.subject }}</td>
-        <td>{{ results.class_score }}</td>
-        <td>{{ results.exam_score }}</td>
-        <td>{{ results.total_score }}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-{% endblock %}
+{% extends "lms/layout.html" %}
+{% load static %}
+
+{% block content %}
+
+    <div class="content container-fluid">
+       {% include "lms/page-header.html" %}
+
+        <div class="card">
+            <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="student-profile-head">
+                        <div class="profile-bg-img">
+                            <img src="{% static 'lms/assets/img/profile-bg.jpg' %}" alt="Profile">
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4">
+                                <div class="profile-user-box">
+                                    <div class="profile-user-img">
+                                        <img src="{% static 'lms/assets/img/profile-user.png' %}" alt="Profile">
+                                    </div>
+                                    <div class="names-profiles">
+                                        <h4>{{ results.name }}</h4>
+                                        <h5>Student ID: {{ results.sid }}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 d-flex align-items-center">
+                                <div class="follow-group">
+                                    <div class="students-follows">
+                                        <h5>Class</h5>
+                                        <h4>{{ results.stage }}</h4>
+                                    </div>
+                                    <div class="students-follows">
+                                        <h5>Term</h5>
+                                        <h4>{{ results.term }}</h4>
+                                    </div>
+                                    <div class="students-follows">
+                                        <h5>Position</h5>
+                                        <h4>{{ results.position }}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 d-flex align-items-center">
+                                <div class="follow-btn-group">
+                                    <a href="{% url 'download-result-pdf' results.id %}" class="btn btn-info follow-btns" target="_blank">Download</a>
+                                    <a href="https://wa.me/{{ student.phone }}" class="btn btn-info message-btns" target="_blank">Share</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="student-personals-grp">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="heading-detail">
+                                    <h4>Student Details :</h4>
+                                </div>
+                                <div class="personal-activity">
+                                    <div class="personal-icons">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="views-personal">
+                                        <h4>Name</h4>
+                                        <h5>{{ results.name }}</h5>
+                                    </div>
+                                </div>
+                                <div class="personal-activity">
+                                    <div class="personal-icons">
+                                        <img src="{% static 'lms/assets/img/icons/buliding-icon.svg' %}" alt="">
+                                    </div>
+                                    <div class="views-personal">
+                                        <h4>Class </h4>
+                                        <h5>{{ results.stage }}</h5>
+                                    </div>
+                                </div>
+                                <div class="personal-activity">
+                                    <div class="personal-icons">
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                    <div class="views-personal">
+                                        <h4>Number on Roll</h4>
+                                        <h5>{{ results.number_on_roll }}</h5>
+                                    </div>
+                                </div>
+                                <div class="personal-activity">
+                                    <div class="personal-icons">
+                                        <i class="fas fa-male"></i>
+                                    </div>
+                                    <div class="views-personal">
+                                        <h4>Boys</h4>
+                                        <h5>{{ results.boys }}</h5>
+                                    </div>
+                                </div>
+                                <div class="personal-activity">
+                                    <div class="personal-icons">
+                                        <i class="fas fa-female"></i>
+                                    </div>
+                                    <div class="views-personal">
+                                        <h4>Girls</h4>
+                                        <h5>{{ results.girls }}</h5>
+                                    </div>
+                                </div>
+                                <div class="personal-activity">
+                                    <div class="personal-icons">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="views-personal">
+                                        <h4>attendance</h4>
+                                        <h5>{{ results.attendance }} out of {{ results.total_attendance }}</h5>
+                                    </div>
+                                </div>
+                                <div class="personal-activity">
+                                    <div class="personal-icons">
+                                        <i class="fas fa-calendar"></i>
+                                    </div>
+                                    <div class="views-personal">
+                                        <h4>Academic Year</h4>
+                                        <h5>{{ results.year }}</h5>
+                                    </div>
+                                </div>
+                                <div class="personal-activity">
+                                    <div class="personal-icons">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <div class="views-personal">
+                                        <h4>Teacher's Comment</h4>
+                                        <h5>{{ results.teachers_comment }}</h5>
+                                    </div>
+                                </div>
+                                <div class="personal-activity">
+                                    <div class="personal-icons">
+                                        <i class="fas fa-calendar"></i>
+                                    </div>
+                                    <div class="views-personal">
+                                        <h4>Next Term Begins</h4>
+                                        <h5>{{ results.next_term }}</h5>
+                                    </div>
+                                </div>
+                                <div class="personal-activity">
+                                    <div class="personal-icons">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </div>
+                                    <div class="views-personal">
+                                        <h4>Promoted to</h4>
+                                        <h5>BS {{ results.promoted_to }}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <h4>Academic Records</h4>
+                    <div class="table-responsive">
+                        <table class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">
+                            <thead class="student-thread">
+                                <tr>
+                                    <th>
+                                        NO.
+                                    </th>
+                                    <th>Subject</th>
+                                    <th>Class Score</th>
+                                    <th>Mid Term</th>
+                                    <th>Exams Score</th>
+                                    <th>Total</th>
+                                    <th>Grade</th>
+                                    <th>Comment</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for result in results.results %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td>{{ result.subject }}</td>
+                                        <td>{{ result.class_score }}</td>
+                                        <td>{{ result.mid_term }}</td>
+                                        <td>{{ result.exam_score }}</td>
+                                        <td>{{ result.total_score }}</td>
+                                        <td>{{ result.grade }}</td>
+                                        <td>{{ result.comment }}</td>
+                                    </tr>
+                                {% endfor %}
+                                {% if not results.results %}
+                                    <tr>
+                                        <td colspan="8" class="text-center">No results found</td>
+                                    </tr>
+                                {% endif %}
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>Total</td>
+                                    <td>{{ results.total }}</td>
+                                    <td></td>
+                                    <td></td>
+                                    
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
