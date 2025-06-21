@@ -173,127 +173,23 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>{{ results.s1 }}</td>
-                                    <td>{{ results.s1ClassScore }}</td>
-                                    <td>{{ results.s1MidTerm }}</td>
-                                    <td>{{ results.s1ExamsScore }}</td>
-                                    <td>{{ results.s1Total }}</td>
-                                    <td>{{ results.s1Grade }}</td>
-                                    <td>{{ results.s1Comment }}</td>
-                                </tr>
-
-                                <tr>
-                                    <td>2</td>
-                                    <td>{{ results.s2 }}</td>
-                                    <td>{{ results.s2ClassScore }}</td>
-                                    <td>{{ results.s2MidTerm }}</td>
-                                    <td>{{ results.s2ExamsScore }}</td>
-                                    <td>{{ results.s2Total }}</td>
-                                    <td>{{ results.s2Grade }}</td>
-                                    <td>{{ results.s2Comment }}</td>
-                                </tr>
-
-                                <tr>
-                                    <td>3</td>
-                                    <td>{{ results.s3 }}</td>
-                                    <td>{{ results.s3ClassScore }}</td>
-                                    <td>{{ results.s3MidTerm }}</td>
-                                    <td>{{ results.s3ExamsScore }}</td>
-                                    <td>{{ results.s3Total }}</td>
-                                    <td>{{ results.s3Grade }}</td>
-                                    <td>{{ results.s3Comment }}</td>
-                                </tr>
-
-                                <tr>
-                                    <td>4</td>
-                                    <td>{{ results.s4 }}</td>
-                                    <td>{{ results.s4ClassScore }}</td>
-                                    <td>{{ results.s4MidTerm }}</td>
-                                    <td>{{ results.s4ExamsScore }}</td>
-                                    <td>{{ results.s4Total }}</td>
-                                    <td>{{ results.s4Grade }}</td>
-                                    <td>{{ results.s4Comment }}</td>
-                                </tr>
-
-                                <tr>
-                                    <td>5</td>
-                                    <td>{{ results.s5 }}</td>
-                                    <td>{{ results.s5ClassScore }}</td>
-                                    <td>{{ results.s5MidTerm }}</td>
-                                    <td>{{ results.s5ExamsScore }}</td>
-                                    <td>{{ results.s5Total }}</td>
-                                    <td>{{ results.s5Grade }}</td>
-                                    <td>{{ results.s5Comment }}</td>
-                                </tr>
-
-                                <tr>
-                                    <td>6</td>
-                                    <td>{{ results.s6 }}</td>
-                                    <td>{{ results.s6ClassScore }}</td>
-                                    <td>{{ results.s6MidTerm }}</td>
-                                    <td>{{ results.s6ExamsScore }}</td>
-                                    <td>{{ results.s6Total }}</td>
-                                    <td>{{ results.s6Grade }}</td>
-                                    <td>{{ results.s6Comment }}</td>
-                                </tr>
-
-                                <tr>
-                                    <td>7</td>
-                                    <td>{{ results.s7 }}</td>
-                                    <td>{{ results.s7ClassScore }}</td>
-                                    <td>{{ results.s7MidTerm }}</td>
-                                    <td>{{ results.s7ExamsScore }}</td>
-                                    <td>{{ results.s7Total }}</td>
-                                    <td>{{ results.s7Grade }}</td>
-                                    <td>{{ results.s7Comment }}</td>
-                                </tr>
-
-                                <tr>
-                                    <td>8</td>
-                                    <td>{{ results.s8 }}</td>
-                                    <td>{{ results.s8ClassScore }}</td>
-                                    <td>{{ results.s8MidTerm }}</td>
-                                    <td>{{ results.s8ExamsScore }}</td>
-                                    <td>{{ results.s8Total }}</td>
-                                    <td>{{ results.s8Grade }}</td>
-                                    <td>{{ results.s8Comment }}</td>
-                                </tr>
-
-                                <tr>
-                                    <td>9</td>
-                                    <td>{{ results.s9 }}</td>
-                                    <td>{{ results.s9ClassScore }}</td>
-                                    <td>{{ results.s9MidTerm }}</td>
-                                    <td>{{ results.s9ExamsScore }}</td>
-                                    <td>{{ results.s9Total }}</td>
-                                    <td>{{ results.s9Grade }}</td>
-                                    <td>{{ results.s9Comment }}</td>
-                                </tr>
-
-                                <tr>
-                                    <td>10</td>
-                                    <td>{{ results.s10 }}</td>
-                                    <td>{{ results.s10ClassScore }}</td>
-                                    <td>{{ results.s10MidTerm }}</td>
-                                    <td>{{ results.s10ExamsScore }}</td>
-                                    <td>{{ results.s10Total }}</td>
-                                    <td>{{ results.s10Grade }}</td>
-                                    <td>{{ results.s10Comment }}</td>
-                                </tr>
-
-                                <tr>
-                                    <td>11</td>
-                                    <td>{{ results.s11 }}</td>
-                                    <td>{{ results.s11ClassScore }}</td>
-                                    <td>{{ results.s11MidTerm }}</td>
-                                    <td>{{ results.s11ExamsScore }}</td>
-                                    <td>{{ results.s11Total }}</td>
-                                    <td>{{ results.s11Grade }}</td>
-                                    <td>{{ results.s11Comment }}</td>
-                                </tr>
-
+                                {% for result in results.results %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td>{{ result.subject }}</td>
+                                        <td>{{ result.class_score }}</td>
+                                        <td>{{ result.mid_term }}</td>
+                                        <td>{{ result.exam_score }}</td>
+                                        <td>{{ result.total_score }}</td>
+                                        <td>{{ result.grade }}</td>
+                                        <td>{{ result.comment }}</td>
+                                    </tr>
+                                {% endfor %}
+                                {% if not results.results %}
+                                    <tr>
+                                        <td colspan="8" class="text-center">No results found</td>
+                                    </tr>
+                                {% endif %}
                                 <tr>
                                     <td></td>
                                     <td></td>
